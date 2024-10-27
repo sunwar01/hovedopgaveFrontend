@@ -25,7 +25,7 @@ jobs:
 
       - name: Run tests
         run: |
-          npm test -- --watch=false --bail
+          npm test -- --watch=false 
 
       - name: Build the project
         run: |
