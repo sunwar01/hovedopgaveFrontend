@@ -1,0 +1,36 @@
+name: Run Angular Tests
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Adjust based on your project
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Lint code
+        run: |
+          npm run lint
+
+      - name: Run tests
+        run: |
+          npm test -- --watch=false --bail
+
+      - name: Build the project
+        run: |
+          npm run build --prod
