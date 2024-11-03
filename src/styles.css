@@ -1,1 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+:root {
+
+  --primaryColor: #00253a;
+  --primaryColorHover: #0056b3;
+  --primaryColorActive: #0056b3;
+  --primaryColorDisabled: #b3d7ff;
+
+  --secondaryColor: #6c757d;
+  --secondaryColorHover: #545b62;
+  --secondaryColorActive: #545b62;
+  --secondaryColorDisabled: #b3b7b9;
+
+  --lightColor: #f8f9fa;
+  --lightColorHover: #e2e6ea;
+  --lightColorActive: #e2e6ea;
+  --lightColorDisabled: #f0f0f0;
+
+  --darkColor: #343a40;
+  --darkColorHover: #23272b;
+  --darkColorActive: #23272b;
+  --darkColorDisabled: #b3b7b9;
+
+  --shadowColor: #b3b3b3;
+
+  --successColor: #28a745;
+  --successColorHover: #218838;
+  --successColorActive: #218838;
+  --successColorDisabled: #b3d7b3;
+
+  --dangerColor: #dc3545;
+  --dangerColorHover: #c82333;
+  --dangerColorActive: #c82333;
+  --dangerColorDisabled: #e6b3b3;
+
+  --warningColor: #ffc107;
+  --warningColorHover: #e0a800;
+  --warningColorActive: #e0a800;
+  --warningColorDisabled: #ffd7b3;
+
+  --infoColor: #17a2b8;
+  --infoColorHover: #138496;
+  --infoColorActive: #138496;
+  --infoColorDisabled: #b3d7e6;
+
+
+  --linkColor: #007bff;
+  --linkColorHover: #0056b3;
+  --linkColorActive: #0056b3;
+  --linkColorDisabled: #b3d7ff;
+
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
