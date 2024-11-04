@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/material/card';
 import {NgIf, NgOptimizedImage} from '@angular/common';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -30,7 +30,7 @@ import {MatButton} from '@angular/material/button';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnInit {
 
 
   loginForm: FormGroup<{username: FormControl<string>, password: FormControl<string> }>;
@@ -82,12 +82,22 @@ export class LoginPageComponent {
               });
 
 
-              //route to main page later
+              this.router.navigate(['/select-store']);
 
             }
 
           });
 
+    }
+  }
+
+
+
+  ngOnInit(): void
+  {
+    if (this.currentUserService.getCurrentUser())
+    {
+      this.router.navigate(['/select-store']);
     }
   }
 
