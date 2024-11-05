@@ -1,13 +1,10 @@
 
-body
+.store-page-container
 {
-
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
-  background-color: var(--lightColor);
+  margin-top : 20vh;
 
 }
 

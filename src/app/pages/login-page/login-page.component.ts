@@ -9,6 +9,7 @@ import {CurrentUserService} from '../../core/services/currentUserService/current
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
+import {first} from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -81,6 +82,7 @@ export class LoginPageComponent implements OnInit {
                 verticalPosition: 'top',
               });
 
+              console.log(this.currentUserService.getCurrentUser());
 
               this.router.navigate(['/select-store']);
 
@@ -95,10 +97,15 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void
   {
-    if (this.currentUserService.getCurrentUser())
-    {
-      this.router.navigate(['/select-store']);
-    }
+
+    this.currentUserService.currentUser$
+      .pipe(first(currentUser => currentUser !== null))
+      .subscribe(currentUser => {
+        console.log(currentUser);
+        this.router.navigate(['/select-store']);
+      });
+
+
   }
 
 

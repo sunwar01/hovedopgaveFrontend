@@ -1,1 +1,26 @@
-<p>main-page works!</p>
+<!DOCTYPE html>
+<html lang="dk">
+
+
+
+<div class="shortcut-container">
+<mat-card>
+<mat-grid-list  cols="3" rowHeight="1:1" [gutterSize]="'1vw'">
+
+  <mat-grid-tile>Kasse (salg)</mat-grid-tile>
+  <mat-grid-tile>Opret ny sag</mat-grid-tile>
+  <mat-grid-tile>Søg efter sag</mat-grid-tile>
+  <mat-grid-tile>Deadline oversigt</mat-grid-tile>
+  <mat-grid-tile>Vis seneste sager</mat-grid-tile>
+  <mat-grid-tile>Vis uafsluttede sager</mat-grid-tile>
+  <mat-grid-tile>Find vare</mat-grid-tile>
+  <mat-grid-tile>Administrer lagerbeholdning</mat-grid-tile>
+  <mat-grid-tile (click)="Logout()">Find kvittering</mat-grid-tile>
+
+</mat-grid-list>
+</mat-card>
+
+</div>
+
+
+</html>

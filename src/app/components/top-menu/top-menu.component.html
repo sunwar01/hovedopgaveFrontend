@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <img ngSrc="/ps_logo_hvid.png" alt="Logo" width="200" height="126"/>
+      <span class="spacer-left"></span>
+      <button mat-button [matMenuTriggerFor]="kasse">Kasse</button>
+      <mat-menu #kasse="matMenu" xPosition="after">
+        <button mat-menu-item>1. Kasse (salg)</button>
+        <button mat-menu-item>2. Kassefunktioner</button>
+        <button mat-menu-item>3. Parkerede kvitteringer</button>
+        <button mat-menu-item>4. Find kvittering</button>
+        <button mat-menu-item>5. Vis seneste kvitteringer</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="service">Service & RMA</button>
+      <mat-menu #service="matMenu" xPosition="after">
+        <button mat-menu-item>1. Opret ny sag</button>
+        <button mat-menu-item>2. Søg efter sag</button>
+        <button mat-menu-item>3. Deadline oversigt</button>
+        <button mat-menu-item>4. Vis seneste sager</button>
+        <button mat-menu-item>5. Vis uafsluttede sager</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="varer">Varer</button>
+      <mat-menu #varer="matMenu" xPosition="after">
+        <button mat-menu-item>1. Opret vare</button>
+        <button mat-menu-item>2. Find vare</button>
+        <button mat-menu-item>3. Varekategorier</button>
+        <button mat-menu-item>4. Producenter</button>
+        <button mat-menu-item>5. Leverandører</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="lager">Lager</button>
+      <mat-menu #lager="matMenu" xPosition="after">
+        <button mat-menu-item>1. Administrer lagerbeholdning</button>
+        <button mat-menu-item>2. Flyt fra lager til lager</button>
+        <button mat-menu-item>3. Lagerrapport</button>
+        <button mat-menu-item>4. Lagerværdi</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="rapporter">Rapporter</button>
+      <mat-menu #rapporter="matMenu" xPosition="after">
+        <button mat-menu-item>1. Kassetransaktioner</button>
+        <button mat-menu-item>2. Kasseopgørelser</button>
+        <button mat-menu-item>3. Kasserapport</button>
+      </mat-menu>
+      <button mat-button>Genveje</button>
+      <span class="spacer-right"></span>
+      <p-avatar
+        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+        pBadge
+        value="4"
+        severity="danger" />
+
+
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+</html>

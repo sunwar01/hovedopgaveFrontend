@@ -1,0 +1,40 @@
+
+
+img
+{
+  border-radius: 10px;
+  max-height: 63px;
+  max-width: 100px;
+
+}
+
+.spacer-left
+{
+  width : 31vw;
+}
+
+.spacer-right
+{
+  width : 35vw;
+
+}
+
+
+.mat-toolbar
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primaryColor);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  width: 100%;
+  height: 9vh;
+}
+
+.mat-toolbar .mat-mdc-button-base
+{
+  color : white;
+}
+
+

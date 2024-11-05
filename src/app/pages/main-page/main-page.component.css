@@ -1,0 +1,44 @@
+
+
+.shortcut-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top : 12vh;
+
+
+}
+
+
+
+
+mat-card
+{
+  width: 60vh;
+  height: auto;
+  padding: 1.5vh;
+  background: var(--lightColor);
+  box-shadow:  var(--shadowColor) 0 0 3vh 0vh;
+  border-radius: 2vh;
+
+}
+
+
+mat-grid-tile {
+  text-align: center;
+  width : auto;
+  height : auto;
+  border-radius: 15px;
+  background: var(--lightColor);
+  box-shadow: var(--shadowColor) 0 0 3vh 0vh;
+}
+
+mat-grid-tile:hover {
+  background: var(--lightColorHover);
+  cursor: pointer;
+}
+
+.transparent {
+  opacity: 0.3;
+  transition: opacity 0.3s ease-in-out;
+}
