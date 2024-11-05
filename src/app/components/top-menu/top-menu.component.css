@@ -1,4 +1,8 @@
 
+mat-icon
+{
+  padding-right: 1vw;
+}
 
 img
 {
@@ -19,6 +23,12 @@ img
 
 }
 
+button
+{
+ margin-right : 2vw;
+
+
+}
 
 .mat-toolbar
 {
