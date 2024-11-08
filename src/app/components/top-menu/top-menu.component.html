@@ -37,7 +37,7 @@
         <button mat-menu-item>2. Find vare</button>
         <button mat-menu-item>3. Varekategorier</button>
         <button mat-menu-item>4. Producenter</button>
-        <button mat-menu-item>5. Leverandører</button>
+        <button mat-menu-item [routerLink]="'/supplier'">5. Leverandører</button>
       </mat-menu>
       <button mat-button [matMenuTriggerFor]="lager">
         <mat-icon>inventory_2</mat-icon>
@@ -58,16 +58,16 @@
         <button mat-menu-item>2. Kasseopgørelser</button>
         <button mat-menu-item>3. Kasserapport</button>
       </mat-menu>
-      <button mat-button>
+      <button mat-button [routerLink]="'/main'">
         <mat-icon>bolt</mat-icon>
         <p>Genveje</p>
       </button>
       <span class="spacer-right"></span>
-      <p-avatar
-        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-        pBadge
-        value="4"
-        severity="danger" />
+
+
+      <p-overlay-badge value="4" severity="danger" class="inline-flex">
+        <p-avatar class="p-overlay-badge" image="https://primefaces.org/cdn/primeng/images/demo/avatar/walter.jpg" size="xlarge" shape="circle"/>
+      </p-overlay-badge>
 
 
 

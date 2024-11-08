@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+
+<div class="supplier-container">
+
+  <p-card header="Leverandører">
+
+    <p-table
+      #supplierTable
+      [value]="availableSuppliers"
+      [globalFilterFields]="['id', 'name', 'website']"
+      [scrollable]="true"
+      scrollHeight="53vh"
+      stripedRows
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[5, 10, 20]">
+
+
+      <ng-template pTemplate="caption">
+        <div class="flex">
+
+          <p-button [outlined]="true" icon="pi pi-plus-circle" label="Tilføj ny leverandør" (onClick)="newSupplierClicked()"/>
+
+          <p-iconfield iconPosition="left">
+            <p-inputicon>
+              <i class="pi pi-search"></i>
+            </p-inputicon>
+            <input
+              pInputText
+              type="text"
+              (input)="supplierTable.filterGlobal($any($event.target).value, 'contains')"
+              placeholder="Søg"
+            />
+          </p-iconfield>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th>Navn</th>
+          <th>Hjemmeside</th>
+          <th>Muligheder</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-supplier>
+        <tr>
+          <td>{{ supplier.id }}</td>
+          <td>{{ supplier.name }}</td>
+          <td>{{ supplier.website }}</td>
+          <td>
+            <p-button
+              icon="pi pi-pencil"
+              severity="success"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="editSupplierClicked(supplier)"
+
+            />
+            <p-button
+              icon="pi pi-trash"
+              severity="danger"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="deleteSupplierClicked(supplier)"
+
+            />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <p-dialog
+      [(visible)]="createSupplierDialog"
+      [style]="{ width: '450px' }"
+      header="Opret leverandør"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content">
+
+
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-warehouse"></i>
+          </p-inputgroup-addon>
+          <input pInputText [(ngModel)]="inputNavn" placeholder="Navn" />
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-link"></i>
+          </p-inputgroup-addon>
+          <input pInputText [(ngModel)]="inputHjemmeside" placeholder="Hjemmeside" />
+        </p-inputgroup>
+
+
+
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideCreateSupplierDialog()"  />
+        <p-button pRipple label="Opret" icon="pi pi-check"  (click)="createNewSupplier()" />
+      </ng-template>
+    </p-dialog>
+
+
+
+    <p-dialog
+      [(visible)]="editSupplierDialog"
+      [style]="{ width: '450px' }"
+      header="Rediger Leverandør"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content">
+        <div *ngIf="selectedSupplier">
+
+
+
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-id-card"></i>
+          </p-inputgroup-addon>
+          <input pInputText [(ngModel)]="selectedSupplier.id" placeholder="Id" [disabled]="true" />
+        </p-inputgroup>
+
+
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-warehouse"></i>
+          </p-inputgroup-addon>
+          <input pInputText [(ngModel)]="selectedSupplier.name" placeholder="Navn" />
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-link"></i>
+          </p-inputgroup-addon>
+          <input pInputText [(ngModel)]="selectedSupplier.website" placeholder="Hjemmeside" />
+        </p-inputgroup>
+        </div>
+      </ng-template>
+
+
+      <ng-template pTemplate="footer">
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideEditSupplierDialog()"  />
+        <p-button pRipple label="Gem" icon="pi pi-check" (click)="saveSupplier()"  />
+      </ng-template>
+    </p-dialog>
+
+
+    <p-dialog
+      [(visible)]="deleteSupplierDialog"
+      [style]="{ width: '450px' }"
+      header="Slet Leverandør [{{selectedSupplier?.name}}]"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content">
+
+
+        <div *ngIf="selectedSupplier">
+          <p>Er du sikker på at du vil slette leverandøren: {{selectedSupplier.name}}?</p>
+        </div>
+
+      </ng-template>
+
+
+      <ng-template pTemplate="footer">
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideDeleteSupplierDialog()"  />
+        <p-button pRipple label="Slet" icon="pi pi-check"   (click)="deleteSupplier()" />
+      </ng-template>
+    </p-dialog>
+
+
+  </p-card>
+
+
+</div>
+
+
+</html>

@@ -9,6 +9,8 @@ import {MatToolbar, MatToolbarRow} from '@angular/material/toolbar';
 import {AvatarModule } from 'primeng/avatar';
 import {BadgeModule} from 'primeng/badge';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
+import {RouterLink} from '@angular/router';
+import {OverlayBadgeModule} from 'primeng/overlaybadge';
 
 
 
@@ -35,6 +37,8 @@ import {MatSlideToggle} from '@angular/material/slide-toggle';
     AvatarModule,
     BadgeModule,
     MatSlideToggle,
+    RouterLink,
+    OverlayBadgeModule,
   ],
   templateUrl: './top-menu.component.html',
   styleUrl: './top-menu.component.css'
