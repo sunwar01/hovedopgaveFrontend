@@ -2,10 +2,15 @@
 <html lang="dk">
 
 
-
 <div class="supplier-container">
+  <p-toast />
+  <p-card header="Leverandører"
+          [style]="
+          {'max-width': '50rem',
+           'border-radius': '2vh',
 
-  <p-card header="Leverandører">
+
+           }">
 
     <p-table
       #supplierTable
@@ -101,8 +106,8 @@
       </ng-template>
 
       <ng-template pTemplate="footer">
-        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideCreateSupplierDialog()"  />
-        <p-button pRipple label="Opret" icon="pi pi-check"  (click)="createNewSupplier()" />
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideCreateSupplierDialog()" severity="secondary" />
+        <p-button pRipple label="Opret" icon="pi pi-check"  (click)="createNewSupplier()" severity="success"/>
       </ng-template>
     </p-dialog>
 
@@ -146,8 +151,8 @@
 
 
       <ng-template pTemplate="footer">
-        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideEditSupplierDialog()"  />
-        <p-button pRipple label="Gem" icon="pi pi-check" (click)="saveSupplier()"  />
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideEditSupplierDialog()" severity="secondary" />
+        <p-button pRipple label="Gem" icon="pi pi-check" (click)="saveSupplier()" severity="success" />
       </ng-template>
     </p-dialog>
 
@@ -170,8 +175,8 @@
 
 
       <ng-template pTemplate="footer">
-        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideDeleteSupplierDialog()"  />
-        <p-button pRipple label="Slet" icon="pi pi-check"   (click)="deleteSupplier()" />
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideDeleteSupplierDialog()" severity="secondary"  />
+        <p-button pRipple label="Slet" icon="pi pi-check"   (click)="deleteSupplier()" severity="danger"/>
       </ng-template>
     </p-dialog>
 

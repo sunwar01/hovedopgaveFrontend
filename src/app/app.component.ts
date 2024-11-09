@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {TopMenuComponent} from './components/top-menu/top-menu.component';
 import {NgIf} from '@angular/common';
-import { PrimeNGConfig } from 'primeng/api';
+import {PrimeNGConfig} from 'primeng/api';
 import { Aura } from 'primeng/themes/aura';
 
 
@@ -20,10 +20,14 @@ export class AppComponent implements OnInit{
 
   constructor(private router: Router, private config: PrimeNGConfig)
   {
+
+    this.config.theme.set({ preset: Aura });
+
     this.router.events.subscribe(() => {
-      this.config.theme.set({ preset: Aura });
       this.checkRoute();
+
     });
+
   }
 
 
@@ -35,6 +39,25 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+
+
+
+    const applyTheme = (prefersDark: boolean) => {
+      document.body.classList.toggle('dark-theme', prefersDark);
+      document.body.classList.toggle('light-theme', !prefersDark);
+    };
+
+    // Apply theme on load
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDark);
+
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      applyTheme(event.matches);
+    });
+
+
     this.config.ripple.set(true);
   }
 

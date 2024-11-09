@@ -13,7 +13,6 @@ import {TagModule} from 'primeng/tag';
 import {NgClass, NgIf} from '@angular/common';
 import {SupplierModel} from '../../core/models/supplierRelated/supplier.model';
 import {Router} from '@angular/router';
-import {CurrentUserService} from '../../core/services/currentUserService/currentUser.service';
 import {SupplierService} from '../../core/services/api/supplier.service';
 import {ButtonModule} from 'primeng/button';
 import {Ripple} from 'primeng/ripple';
@@ -22,6 +21,8 @@ import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 import {InputGroupModule} from 'primeng/inputgroup';
 import {SupplierPostDto} from '../../core/models/supplierRelated/dto/supplierPost.dto';
 import {SupplierGetDto} from '../../core/models/supplierRelated/dto/supplierGet.dto';
+import {ToastService} from '../../core/services/toastService/toast.service';
+import {ToastModule} from 'primeng/toast';
 
 
 @Component({
@@ -49,7 +50,8 @@ import {SupplierGetDto} from '../../core/models/supplierRelated/dto/supplierGet.
     DialogModule,
     NgIf,
     InputGroupAddonModule,
-    InputGroupModule
+    InputGroupModule,
+    ToastModule
   ],
   templateUrl: './supplier-page.component.html',
   styleUrl: './supplier-page.component.css'
@@ -69,7 +71,7 @@ export class SupplierPageComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private currentUser: CurrentUserService, private supplierService: SupplierService)
+  constructor(private router: Router, private supplierService: SupplierService, private toastService: ToastService)
   {
   }
 
@@ -77,13 +79,18 @@ export class SupplierPageComponent implements OnInit {
   ngOnInit(): void
   {
 
+    this.updateSupplierList();
+
+  }
+
+  updateSupplierList()
+  {
     this.supplierService.GetSuppliers().subscribe((data: SupplierModel[]) =>
     {
       this.availableSuppliers = data;
       console.log(this.availableSuppliers);
 
     });
-
   }
 
   clearInput()
@@ -111,32 +118,6 @@ export class SupplierPageComponent implements OnInit {
     this.createSupplierDialog = true;
   }
 
-  createNewSupplier()
-  {
-
-    const supplier: SupplierPostDto = {
-      name: this.inputNavn,
-      website: this.inputHjemmeside
-    };
-
-    console.log("supplier" + supplier);
-
-    this.supplierService.CreateSupplier(supplier).subscribe({
-      next: (data: any) => {
-
-      },
-      error: (error: any) => {
-        console.log(error);
-      },
-      complete: () => {
-        this.createSupplierDialog = false;
-        this.clearInput();
-        this.ngOnInit();
-
-      }
-    });
-
-  }
 
   editSupplierClicked(supplier: SupplierGetDto) {
     this.selectedSupplier = { ...supplier };
@@ -149,6 +130,32 @@ export class SupplierPageComponent implements OnInit {
   }
 
 
+  createNewSupplier()
+  {
+
+    const supplier: SupplierPostDto = {
+      name: this.inputNavn,
+      website: this.inputHjemmeside
+    };
+
+    this.supplierService.CreateSupplier(supplier).subscribe({
+      next: (data: any) => {
+
+      },
+      error: (error: any) => {
+        this.toastService.showError(error);
+        console.log(error);
+      },
+      complete: () => {
+        this.createSupplierDialog = false;
+        this.toastService.showSuccess("Supplier created successfully");
+        this.clearInput();
+        this.updateSupplierList();
+      }
+    });
+
+  }
+
   deleteSupplier()
   {
     if (this.selectedSupplier)
@@ -159,11 +166,13 @@ export class SupplierPageComponent implements OnInit {
         },
         error: (error: any) => {
           console.log(error);
+          this.toastService.showError(error);
         },
         complete: () => {
           this.deleteSupplierDialog = false;
+          this.toastService.showSuccess("Supplier deleted successfully");
           this.selectedSupplier = null;
-          this.ngOnInit();
+          this.updateSupplierList();
 
         }
       });
@@ -180,11 +189,13 @@ export class SupplierPageComponent implements OnInit {
         },
         error: (error: any) => {
           console.log(error);
+          this.toastService.showError(error);
         },
         complete: () => {
           this.editSupplierDialog = false;
+          this.toastService.showSuccess("Supplier updated successfully");
           this.selectedSupplier = null;
-          this.ngOnInit();
+          this.updateSupplierList();
 
         }
       });
