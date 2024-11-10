@@ -4,6 +4,8 @@ import {StorePageComponent} from './pages/store-page/store-page.component';
 import {MainPageComponent} from './pages/main-page/main-page.component';
 import {SupplierPageComponent} from './pages/supplier-page/supplier-page.component';
 import {CategoryPageComponent} from './pages/category-page/category-page.component';
+import {SubCategoryPageComponent} from './pages/sub-category-page/sub-category-page.component';
+import {ManufacturerPageComponent} from './pages/manufacturer-page/manufacturer-page.component';
 
 export const routes: Routes = [
 
@@ -24,7 +26,8 @@ export const routes: Routes = [
 
   { path: 'supplier', component: SupplierPageComponent},
   { path: 'category', component: CategoryPageComponent},
-
+  { path: 'sub-category', component: SubCategoryPageComponent},
+  { path: 'manufacturer', component: ManufacturerPageComponent},
 
 
 

@@ -2,9 +2,9 @@
 <html lang="dk">
 
 
-<div class="category-container">
+<div class="manufacturer-container">
   <p-toast />
-  <p-card header="Kategorier"
+  <p-card header="Producenter"
           [style]="
           {'max-width': '50rem',
            'border-radius': '2vh',
@@ -14,9 +14,9 @@
            }">
 
     <p-table
-      #categoryTable
-      [value]="availableCategories"
-      [globalFilterFields]="['id', 'name']"
+      #manufacturerTable
+      [value]="availableManufacturers"
+      [globalFilterFields]="['id', 'name', 'website']"
       [scrollable]="true"
       scrollHeight="53vh"
       stripedRows
@@ -28,7 +28,7 @@
       <ng-template pTemplate="caption">
         <div class="flex">
 
-          <p-button [outlined]="true" icon="pi pi-plus-circle" label="Tilføj ny kategori" (onClick)="newCategoryClicked()"/>
+          <p-button [outlined]="true" icon="pi pi-plus-circle" label="Tilføj ny producent" (onClick)="newManufacturerClicked()"/>
 
           <p-iconfield iconPosition="left">
             <p-inputicon>
@@ -37,7 +37,7 @@
             <input
               pInputText
               type="text"
-              (input)="categoryTable.filterGlobal($any($event.target).value, 'contains')"
+              (input)="manufacturerTable.filterGlobal($any($event.target).value, 'contains')"
               placeholder="Søg"
             />
           </p-iconfield>
@@ -47,20 +47,22 @@
         <tr>
           <th>Id</th>
           <th>Navn</th>
+          <th>Hjemmeside</th>
           <th>Muligheder</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-category>
+      <ng-template pTemplate="body" let-manufacturer>
         <tr>
-          <td>{{ category.id }}</td>
-          <td>{{ category.name }}</td>
+          <td>{{ manufacturer.id }}</td>
+          <td>{{ manufacturer.name }}</td>
+          <td>{{ manufacturer.website }}</td>
           <td>
             <p-button
               icon="pi pi-pencil"
               severity="success"
               [rounded]="true"
               [outlined]="true"
-              (click)="editCategoryClicked(category)"
+              (click)="editManufacturerClicked(manufacturer)"
 
             />
             <p-button
@@ -68,7 +70,7 @@
               severity="danger"
               [rounded]="true"
               [outlined]="true"
-              (click)="deleteCategoryClicked(category)"
+              (click)="deleteManufacturerClicked(manufacturer)"
 
             />
           </td>
@@ -77,9 +79,9 @@
     </p-table>
 
     <p-dialog
-      [(visible)]="createCategoryDialog"
+      [(visible)]="createManufacturerDialog"
       [style]="{ width: '450px' }"
-      header="Opret kategori"
+      header="Opret producent"
       [modal]="true"
       styleClass="p-fluid"
     >
@@ -93,26 +95,34 @@
           <input pInputText [(ngModel)]="inputNavn" placeholder="Navn" />
         </p-inputgroup>
 
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-link"></i>
+          </p-inputgroup-addon>
+          <input pInputText [(ngModel)]="inputHjemmeside" placeholder="Hjemmeside" />
+        </p-inputgroup>
+
+
 
       </ng-template>
 
       <ng-template pTemplate="footer">
-        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideCreateCategoryDialog()" severity="secondary" />
-        <p-button pRipple label="Opret" icon="pi pi-check"  (click)="createNewCategory()" severity="success"/>
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideCreateManufacturerDialog()" severity="secondary" />
+        <p-button pRipple label="Opret" icon="pi pi-check"  (click)="createNewManufacturer()" severity="success"/>
       </ng-template>
     </p-dialog>
 
 
 
     <p-dialog
-      [(visible)]="editCategoryDialog"
+      [(visible)]="editManufacturerDialog"
       [style]="{ width: '450px' }"
-      header="Rediger Leverandør"
+      header="Rediger producent"
       [modal]="true"
       styleClass="p-fluid"
     >
       <ng-template pTemplate="content">
-        <div *ngIf="selectedCategory">
+        <div *ngIf="selectedManufacturer">
 
 
 
@@ -120,7 +130,7 @@
             <p-inputgroup-addon>
               <i class="pi pi-id-card"></i>
             </p-inputgroup-addon>
-            <input pInputText [(ngModel)]="selectedCategory.id" placeholder="Id" [disabled]="true" />
+            <input pInputText [(ngModel)]="selectedManufacturer.id" placeholder="Id" [disabled]="true" />
           </p-inputgroup>
 
 
@@ -128,40 +138,46 @@
             <p-inputgroup-addon>
               <i class="pi pi-warehouse"></i>
             </p-inputgroup-addon>
-            <input pInputText [(ngModel)]="selectedCategory.name" placeholder="Navn" />
+            <input pInputText [(ngModel)]="selectedManufacturer.name" placeholder="Navn" />
           </p-inputgroup>
 
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <i class="pi pi-link"></i>
+            </p-inputgroup-addon>
+            <input pInputText [(ngModel)]="selectedManufacturer.website" placeholder="Hjemmeside" />
+          </p-inputgroup>
         </div>
       </ng-template>
 
 
       <ng-template pTemplate="footer">
-        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideEditCategoryDialog()" severity="secondary" />
-        <p-button pRipple label="Gem" icon="pi pi-check" (click)="saveCategory()" severity="success" />
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideEditManufacturerDialog()" severity="secondary" />
+        <p-button pRipple label="Gem" icon="pi pi-check" (click)="saveManufacturer()" severity="success" />
       </ng-template>
     </p-dialog>
 
 
     <p-dialog
-      [(visible)]="deleteCategoryDialog"
+      [(visible)]="deleteManufacturerDialog"
       [style]="{ width: '450px' }"
-      header="Slet Leverandør [{{selectedCategory?.name}}]"
+      header="Slet producent [{{selectedManufacturer?.name}}]"
       [modal]="true"
       styleClass="p-fluid"
     >
       <ng-template pTemplate="content">
 
 
-        <div *ngIf="selectedCategory">
-          <p>Er du sikker på at du vil slette kategorien: {{selectedCategory.name}}?</p>
+        <div *ngIf="selectedManufacturer">
+          <p>Er du sikker på at du vil slette producenten: {{selectedManufacturer.name}}?</p>
         </div>
 
       </ng-template>
 
 
       <ng-template pTemplate="footer">
-        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideDeleteCategoryDialog()" severity="secondary"  />
-        <p-button pRipple label="Slet" icon="pi pi-check"   (click)="deleteCategory()" severity="danger"/>
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideDeleteManufacturerDialog()" severity="secondary"  />
+        <p-button pRipple label="Slet" icon="pi pi-check"   (click)="deleteManufacturer()" severity="danger"/>
       </ng-template>
     </p-dialog>
 

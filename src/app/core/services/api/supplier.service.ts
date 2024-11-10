@@ -28,12 +28,12 @@ export class SupplierService
     return this.http.get(`${this.baseUrl}GetSupplier/${id}`);
   }
 
-  CreateSupplier(supplier: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}CreateSupplier`, supplier);
+  CreateSupplier(manufacturer: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}CreateSupplier`, manufacturer);
   }
 
-  UpdateSupplier(supplier: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}UpdateSupplier/${supplier.id}`, supplier);
+  UpdateSupplier(manufacturer: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}UpdateSupplier/${manufacturer.id}`, manufacturer);
   }
 
   DeleteSupplier(id: number): Observable<any> {
