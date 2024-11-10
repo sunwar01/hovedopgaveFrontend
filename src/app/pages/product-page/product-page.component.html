@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+<div class="product-container">
+  <p-toast />
+  <p-card header="Produkter"
+          [style]="
+          {'max-width': '60rem',
+           'border-radius': '2vh',
+           'min-width': '40rem',
+
+
+           }">
+
+    <p-table
+      #productTable
+      [value]="availableProducts"
+      [globalFilterFields]="['id', 'name', 'supplierProductId']"
+      [scrollable]="true"
+      scrollHeight="53vh"
+      stripedRows
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[5, 10, 20]">
+
+
+      <ng-template pTemplate="caption">
+        <div class="flex">
+
+          <p-button [outlined]="true" icon="pi pi-plus-circle" label="Tilføj nyt produkt" (onClick)="newProductClicked()"/>
+
+          <p-iconfield iconPosition="left">
+            <p-inputicon>
+              <i class="pi pi-search"></i>
+            </p-inputicon>
+            <input
+              pInputText
+              type="text"
+              (input)="productTable.filterGlobal($any($event.target).value, 'contains')"
+              placeholder="Søg"
+            />
+          </p-iconfield>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th>Navn</th>
+          <th>Pris</th>
+          <th>Nettopris</th>
+          <th>Kategori</th>
+          <th>Producent</th>
+          <th>Leverandør</th>
+          <th>Leverandør produkt id</th>
+          <th>Muligheder</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.netPrice }}</td>
+          <td>{{ getCategoryNameById(product.categoryId)}}</td>
+          <td>{{ getManufacturerNameById(product.manufacturerId )}}</td>
+          <td>{{ getSupplierNameById(product.supplierId )}}</td>
+          <td>{{ product.supplierProductId }}</td>
+          <td>
+            <p-button
+              icon="pi pi-pencil"
+              severity="success"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="editProductClicked(product)"
+
+            />
+            <p-button
+              icon="pi pi-trash"
+              severity="danger"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="deleteProductClicked(product)"
+
+            />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <p-dialog
+      [(visible)]="createProductDialog"
+      [style]="{ width: '450px' }"
+      header="Opret produkt"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content">
+        <div style="display: flex; flex-direction: column; min-height: 550px;">
+
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-warehouse"></i>
+          </p-inputgroup-addon>
+          <p-floatlabel variant="in">
+            <input pInputText id="in_label_navn" [(ngModel)]="inputNavn" />
+            <label for="in_label_navn">Navn</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-money-bill"></i>
+          </p-inputgroup-addon>
+          <p-floatlabel variant="in">
+            <input pInputText id="in_label_pris" [(ngModel)]="inputPris" />
+            <label for="in_label_pris">Pris</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+
+
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-money-bill"></i>
+          </p-inputgroup-addon>
+          <p-floatlabel variant="in">
+            <input pInputText id="in_label_nettoPris" [(ngModel)]="inputNettoPris" />
+            <label for="in_label_nettoPris">Nettopris</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+
+
+        <p-select [options]="availableCategories"
+                  [(ngModel)]="selectedCategory"
+                  optionLabel="name"
+                  [filter]="true" filterBy="name"
+                  [showClear]="true"
+                  placeholder="Vælg kategori"
+                  [virtualScroll]="true"
+                  [virtualScrollItemSize]="38">
+
+        </p-select>
+
+
+        <p-select [options]="availableManufacturers"
+                  [(ngModel)]="selectedManufacturer"
+                  optionLabel="name"
+                  [filter]="true" filterBy="name"
+                  [showClear]="true"
+                  placeholder="Vælg producent"
+                  [virtualScroll]="true"
+                  [virtualScrollItemSize]="38">
+
+        </p-select>
+
+        <p-select [options]="availableSuppliers"
+                  [(ngModel)]="selectedSupplier"
+                  optionLabel="name"
+                  [filter]="true" filterBy="name"
+                  [showClear]="true"
+                  placeholder="Vælg leverandør"
+                  [virtualScroll]="true"
+                  [virtualScrollItemSize]="38">
+
+        </p-select>
+
+
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-key"></i>
+          </p-inputgroup-addon>
+          <p-floatlabel variant="in">
+            <input pInputText id="in_label_leverandoerProduktId" [(ngModel)]="inputLeverandoerProduktId" />
+            <label for="in_label_leverandoerProduktId">Leverandør produkt id</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        </div>
+
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideCreateProductDialog()" severity="secondary" />
+        <p-button pRipple label="Opret" icon="pi pi-check"  (click)="createNewProduct()" severity="success"/>
+      </ng-template>
+
+
+
+    </p-dialog>
+
+
+
+    <p-dialog
+      [(visible)]="editProductDialog"
+      [style]="{ width: '450px' }"
+      header="Rediger Produkt"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content">
+        <div style="display: flex; flex-direction: column; min-height: 550px;" *ngIf="selectedProduct">
+
+
+
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <i class="pi pi-warehouse"></i>
+            </p-inputgroup-addon>
+            <p-floatlabel variant="in">
+              <input pInputText id="in_label_navnE" [(ngModel)]="selectedProduct.name" />
+              <label for="in_label_navnE">Navn</label>
+            </p-floatlabel>
+          </p-inputgroup>
+
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <i class="pi pi-money-bill"></i>
+            </p-inputgroup-addon>
+            <p-floatlabel variant="in">
+              <input pInputText id="in_label_prisE" [(ngModel)]="selectedProduct.price" />
+              <label for="in_label_prisE">Pris</label>
+            </p-floatlabel>
+          </p-inputgroup>
+
+
+
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <i class="pi pi-money-bill"></i>
+            </p-inputgroup-addon>
+            <p-floatlabel variant="in">
+              <input pInputText id="in_label_nettoPrisE" [(ngModel)]="selectedProduct.netPrice" />
+              <label for="in_label_nettoPrisE">Nettopris</label>
+            </p-floatlabel>
+          </p-inputgroup>
+
+
+
+          <p-select [options]="availableCategories"
+                    [(ngModel)]="selectedCategory"
+                    optionLabel="name"
+                    [filter]="true" filterBy="name"
+                    [showClear]="true"
+                    placeholder="Vælg kategori"
+                    [virtualScroll]="true"
+                    [virtualScrollItemSize]="38"
+                    (ngModelChange)="selectedProduct.categoryId = $event?.id || null">
+
+          </p-select>
+
+
+          <p-select [options]="availableManufacturers"
+                    [(ngModel)]="selectedManufacturer"
+                    optionLabel="name"
+                    [filter]="true" filterBy="name"
+                    [showClear]="true"
+                    placeholder="Vælg producent"
+                    [virtualScroll]="true"
+                    [virtualScrollItemSize]="38"
+                    (ngModelChange)="selectedProduct.manufacturerId = $event?.id || null">
+
+          </p-select>
+
+          <p-select [options]="availableSuppliers"
+                    [(ngModel)]="selectedSupplier"
+                    optionLabel="name"
+                    [filter]="true" filterBy="name"
+                    [showClear]="true"
+                    placeholder="Vælg leverandør"
+                    [virtualScroll]="true"
+                    [virtualScrollItemSize]="38"
+                    (ngModelChange)="selectedProduct.supplierId = $event?.id || null">
+
+          </p-select>
+
+
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <i class="pi pi-key"></i>
+            </p-inputgroup-addon>
+            <p-floatlabel variant="in">
+              <input pInputText id="in_label_leverandoerProduktIdE" [(ngModel)]="selectedProduct.supplierProductId" />
+              <label for="in_label_leverandoerProduktIdE">Leverandør produkt id</label>
+            </p-floatlabel>
+          </p-inputgroup>
+
+        </div>
+      </ng-template>
+
+
+      <ng-template pTemplate="footer">
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideEditProductDialog()" severity="secondary" />
+        <p-button pRipple label="Gem" icon="pi pi-check" (click)="saveProduct()" severity="success" />
+      </ng-template>
+    </p-dialog>
+
+
+    <p-dialog
+      [(visible)]="deleteProductDialog"
+      [style]="{ width: '450px' }"
+      header="Slet Produkt [{{selectedProduct?.name}}]"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content">
+
+
+        <div *ngIf="selectedProduct">
+          <p>Er du sikker på at du vil slette produktet: {{selectedProduct.name}}?</p>
+        </div>
+
+      </ng-template>
+
+
+      <ng-template pTemplate="footer">
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideDeleteProductDialog()" severity="secondary"  />
+        <p-button pRipple label="Slet" icon="pi pi-check"   (click)="deleteProduct()" severity="danger"/>
+      </ng-template>
+    </p-dialog>
+
+
+  </p-card>
+
+
+</div>
+
+
+</html>

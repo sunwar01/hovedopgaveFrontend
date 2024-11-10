@@ -33,11 +33,10 @@
         Varer
       </button>
       <mat-menu #varer="matMenu" xPosition="after">
-        <button mat-menu-item>1. Varer</button>
+        <button mat-menu-item [routerLink]="'/products'">1. Varer</button>
         <button mat-menu-item [routerLink]="'/category'">2. Kategorier</button>
-        <button mat-menu-item [routerLink]="'/sub-category'">3. Underkategorier</button>
-        <button mat-menu-item [routerLink]="'/manufacturer'">4. Producenter</button>
-        <button mat-menu-item [routerLink]="'/supplier'">5. Leverandører</button>
+        <button mat-menu-item [routerLink]="'/manufacturer'">3. Producenter</button>
+        <button mat-menu-item [routerLink]="'/supplier'">4. Leverandører</button>
       </mat-menu>
       <button mat-button [matMenuTriggerFor]="lager">
         <mat-icon>inventory_2</mat-icon>
