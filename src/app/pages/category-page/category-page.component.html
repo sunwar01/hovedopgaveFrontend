@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+<div class="category-container">
+  <p-toast />
+  <p-card header="Kategorier"
+          [style]="
+          {'max-width': '50rem',
+           'border-radius': '2vh',
+           'min-width': '40rem',
+
+
+           }">
+
+    <p-table
+      #categoryTable
+      [value]="availableCategories"
+      [globalFilterFields]="['id', 'name']"
+      [scrollable]="true"
+      scrollHeight="53vh"
+      stripedRows
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[5, 10, 20]">
+
+
+      <ng-template pTemplate="caption">
+        <div class="flex">
+
+          <p-button [outlined]="true" icon="pi pi-plus-circle" label="Tilføj ny kategori" (onClick)="newCategoryClicked()"/>
+
+          <p-iconfield iconPosition="left">
+            <p-inputicon>
+              <i class="pi pi-search"></i>
+            </p-inputicon>
+            <input
+              pInputText
+              type="text"
+              (input)="categoryTable.filterGlobal($any($event.target).value, 'contains')"
+              placeholder="Søg"
+            />
+          </p-iconfield>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th>Navn</th>
+          <th>Muligheder</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-supplier>
+        <tr>
+          <td>{{ supplier.id }}</td>
+          <td>{{ supplier.name }}</td>
+          <td>
+            <p-button
+              icon="pi pi-pencil"
+              severity="success"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="editCategoryClicked(supplier)"
+
+            />
+            <p-button
+              icon="pi pi-trash"
+              severity="danger"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="deleteCategoryClicked(supplier)"
+
+            />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <p-dialog
+      [(visible)]="createCategoryDialog"
+      [style]="{ width: '450px' }"
+      header="Opret kategori"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content">
+
+
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-warehouse"></i>
+          </p-inputgroup-addon>
+          <input pInputText [(ngModel)]="inputNavn" placeholder="Navn" />
+        </p-inputgroup>
+
+
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideCreateCategoryDialog()" severity="secondary" />
+        <p-button pRipple label="Opret" icon="pi pi-check"  (click)="createNewCategory()" severity="success"/>
+      </ng-template>
+    </p-dialog>
+
+
+
+    <p-dialog
+      [(visible)]="editCategoryDialog"
+      [style]="{ width: '450px' }"
+      header="Rediger Leverandør"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content">
+        <div *ngIf="selectedCategory">
+
+
+
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <i class="pi pi-id-card"></i>
+            </p-inputgroup-addon>
+            <input pInputText [(ngModel)]="selectedCategory.id" placeholder="Id" [disabled]="true" />
+          </p-inputgroup>
+
+
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <i class="pi pi-warehouse"></i>
+            </p-inputgroup-addon>
+            <input pInputText [(ngModel)]="selectedCategory.name" placeholder="Navn" />
+          </p-inputgroup>
+
+        </div>
+      </ng-template>
+
+
+      <ng-template pTemplate="footer">
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideEditCategoryDialog()" severity="secondary" />
+        <p-button pRipple label="Gem" icon="pi pi-check" (click)="saveCategory()" severity="success" />
+      </ng-template>
+    </p-dialog>
+
+
+    <p-dialog
+      [(visible)]="deleteCategoryDialog"
+      [style]="{ width: '450px' }"
+      header="Slet Leverandør [{{selectedCategory?.name}}]"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content">
+
+
+        <div *ngIf="selectedCategory">
+          <p>Er du sikker på at du vil slette kategorien: {{selectedCategory.name}}?</p>
+        </div>
+
+      </ng-template>
+
+
+      <ng-template pTemplate="footer">
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideDeleteCategoryDialog()" severity="secondary"  />
+        <p-button pRipple label="Slet" icon="pi pi-check"   (click)="deleteCategory()" severity="danger"/>
+      </ng-template>
+    </p-dialog>
+
+
+  </p-card>
+
+
+</div>
+
+
+</html>

@@ -20,7 +20,6 @@ import {DialogModule} from 'primeng/dialog';
 import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 import {InputGroupModule} from 'primeng/inputgroup';
 import {SupplierPostDto} from '../../core/models/supplierRelated/dto/supplierPost.dto';
-import {SupplierGetDto} from '../../core/models/supplierRelated/dto/supplierGet.dto';
 import {ToastService} from '../../core/services/toastService/toast.service';
 import {ToastModule} from 'primeng/toast';
 
@@ -88,8 +87,6 @@ export class SupplierPageComponent implements OnInit {
     this.supplierService.GetSuppliers().subscribe((data: SupplierModel[]) =>
     {
       this.availableSuppliers = data;
-      console.log(this.availableSuppliers);
-
     });
   }
 
@@ -119,12 +116,12 @@ export class SupplierPageComponent implements OnInit {
   }
 
 
-  editSupplierClicked(supplier: SupplierGetDto) {
+  editSupplierClicked(supplier: SupplierModel) {
     this.selectedSupplier = { ...supplier };
     this.editSupplierDialog = true;
   }
 
-  deleteSupplierClicked(supplier: SupplierGetDto) {
+  deleteSupplierClicked(supplier: SupplierModel) {
     this.selectedSupplier = { ...supplier };
     this.deleteSupplierDialog = true;
   }

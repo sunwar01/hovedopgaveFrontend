@@ -35,7 +35,7 @@
       <mat-menu #varer="matMenu" xPosition="after">
         <button mat-menu-item>1. Opret vare</button>
         <button mat-menu-item>2. Find vare</button>
-        <button mat-menu-item>3. Varekategorier</button>
+        <button mat-menu-item [routerLink]="'/category'">3. Varekategorier</button>
         <button mat-menu-item>4. Producenter</button>
         <button mat-menu-item [routerLink]="'/supplier'">5. Leverandører</button>
       </mat-menu>

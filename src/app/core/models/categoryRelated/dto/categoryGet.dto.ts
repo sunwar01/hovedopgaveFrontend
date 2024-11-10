@@ -1,11 +1,7 @@
 
 
-
-
-
-export interface SupplierModel {
+export interface CategoryGetDto {
   id: number;
   name: string;
-  website: string;
   isDeleted: boolean;
 }
