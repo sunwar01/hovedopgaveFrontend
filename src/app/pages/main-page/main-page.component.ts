@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {MatGridList, MatGridTile} from '@angular/material/grid-list';
 import {MatCard} from '@angular/material/card';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {CurrentUserService} from '../../core/services/currentUserService/currentUser.service';
 
 @Component({
@@ -10,7 +10,8 @@ import {CurrentUserService} from '../../core/services/currentUserService/current
   imports: [
     MatGridList,
     MatGridTile,
-    MatCard
+    MatCard,
+    RouterLink
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'

@@ -43,7 +43,7 @@
         Lager
       </button>
       <mat-menu #lager="matMenu" xPosition="after">
-        <button mat-menu-item>1. Administrer lagerbeholdning</button>
+        <button mat-menu-item [routerLink]="'/stock-management'" >1. Administrer lagerbeholdning</button>
         <button mat-menu-item>2. Flyt fra lager til lager</button>
         <button mat-menu-item>3. Lagerrapport</button>
         <button mat-menu-item>4. Lagerværdi</button>

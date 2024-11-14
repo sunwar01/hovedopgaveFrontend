@@ -82,7 +82,7 @@ export class LoginPageComponent implements OnInit {
                 verticalPosition: 'top',
               });
 
-              console.log(this.currentUserService.getCurrentUser());
+
 
               this.router.navigate(['/select-store']);
 
@@ -101,7 +101,6 @@ export class LoginPageComponent implements OnInit {
     this.currentUserService.currentUser$
       .pipe(first(currentUser => currentUser !== null))
       .subscribe(currentUser => {
-        console.log(currentUser);
         this.router.navigate(['/select-store']);
       });
 

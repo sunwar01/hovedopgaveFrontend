@@ -108,47 +108,6 @@ export class ProductPageComponent implements OnInit
   }
 
 
-  getCategoryNameById(id: number): string
-  {
-    if (this.availableCategories)
-    {
-      const category = this.availableCategories.find(x => x.id === id);
-      if (category)
-      {
-        return category.name;
-      }
-    }
-    return '';
-  }
-
-  getManufacturerNameById(id: number): string
-  {
-    if (this.availableManufacturers)
-    {
-      const manufacturer = this.availableManufacturers.find(x => x.id === id);
-      if (manufacturer)
-      {
-        return manufacturer.name;
-      }
-    }
-    return '';
-  }
-
-  getSupplierNameById(id: number): string
-  {
-    if (this.availableSuppliers)
-    {
-      const supplier = this.availableSuppliers.find(x => x.id === id);
-      if (supplier)
-      {
-        return supplier.name;
-      }
-    }
-    return '';
-  }
-
-
-
 
   updateProductList()
   {

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CookiesService} from '../cookiesService/cookies.service';
 import {StoreModel} from '../../models/storeRelated/store.model';
+import {StoreGetDto} from '../../models/storeRelated/dto/storeGet.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,13 @@ export class CurrentStoreService
   constructor(private cookiesService: CookiesService)
   {
 
+    this.getCurrentStore();
   }
 
-  public currentStore: StoreModel | null = null;
+  public currentStore: StoreGetDto | null = null;
 
 
-  public getCurrentStore(): StoreModel | null
+  public getCurrentStore(): StoreGetDto | null
   {
     if (!this.currentStore)
     {

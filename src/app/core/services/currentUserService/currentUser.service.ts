@@ -32,9 +32,9 @@ export class CurrentUserService
     {
       this.setCurrentUser(JSON.parse(user), 1);
 
-
     }
   }
+
 
 
   public getCurrentUser():Observable<UserModel | null>

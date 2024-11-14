@@ -13,8 +13,8 @@
   <mat-grid-tile>Deadline oversigt</mat-grid-tile>
   <mat-grid-tile>Vis seneste sager</mat-grid-tile>
   <mat-grid-tile>Vis uafsluttede sager</mat-grid-tile>
-  <mat-grid-tile>Find vare</mat-grid-tile>
-  <mat-grid-tile>Administrer lagerbeholdning</mat-grid-tile>
+  <mat-grid-tile [routerLink]="'/products'">Varer</mat-grid-tile>
+  <mat-grid-tile [routerLink]="'/stock-management'">Administrer lagerbeholdning</mat-grid-tile>
   <mat-grid-tile (click)="Logout()">Find kvittering</mat-grid-tile>
 
 </mat-grid-list>

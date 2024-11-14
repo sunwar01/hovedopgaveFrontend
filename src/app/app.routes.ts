@@ -6,6 +6,7 @@ import {SupplierPageComponent} from './pages/supplier-page/supplier-page.compone
 import {CategoryPageComponent} from './pages/category-page/category-page.component';
 import {ManufacturerPageComponent} from './pages/manufacturer-page/manufacturer-page.component';
 import {ProductPageComponent} from './pages/product-page/product-page.component';
+import {StockManagementPageComponent} from './pages/stock-management-page/stock-management-page.component';
 
 export const routes: Routes = [
 
@@ -28,6 +29,13 @@ export const routes: Routes = [
   { path: 'category', component: CategoryPageComponent},
   { path: 'manufacturer', component: ManufacturerPageComponent},
   { path: 'products', component: ProductPageComponent},
+
+
+  /*******************************************
+   *           Stock Related                 *
+   * *****************************************/
+  { path: 'stock-management', component: StockManagementPageComponent},
+
 
 
 

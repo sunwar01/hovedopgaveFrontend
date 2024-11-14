@@ -16,7 +16,7 @@
     <p-table
       #productTable
       [value]="availableProducts"
-      [globalFilterFields]="['id', 'name', 'supplierProductId']"
+      [globalFilterFields]="['name', 'supplierProductId', 'category.name', 'manufacturer.name', 'supplier.name']"
       [scrollable]="true"
       scrollHeight="53vh"
       stripedRows
@@ -62,9 +62,9 @@
           <td>{{ product.name }}</td>
           <td>{{ product.price }}</td>
           <td>{{ product.netPrice }}</td>
-          <td>{{ getCategoryNameById(product.categoryId)}}</td>
-          <td>{{ getManufacturerNameById(product.manufacturerId )}}</td>
-          <td>{{ getSupplierNameById(product.supplierId )}}</td>
+          <td>{{ product.category.name }}</td>
+          <td>{{ product.manufacturer.name }}</td>
+          <td>{{ product.supplier.name }}</td>
           <td>{{ product.supplierProductId }}</td>
           <td>
             <p-button
