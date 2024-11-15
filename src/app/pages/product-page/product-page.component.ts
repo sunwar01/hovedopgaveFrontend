@@ -27,6 +27,9 @@ import {CategoryModel} from '../../core/models/categoryRelated/category.model';
 import {ManufacturerModel} from '../../core/models/manufacturerRelated/manufacturer.model';
 import {SupplierPageComponent} from '../supplier-page/supplier-page.component';
 import {SupplierModel} from '../../core/models/supplierRelated/supplier.model';
+import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
+import {StockProductsModel} from '../../core/models/stockProductsRelated/stockProducts.model';
+import {CurrentStoreService} from '../../core/services/currentStoreService/currentStore.service';
 
 @Component({
   selector: 'app-product-page',
@@ -48,7 +51,12 @@ import {SupplierModel} from '../../core/models/supplierRelated/supplier.model';
     ToastModule,
     FormsModule,
     FloatLabelModule,
-    Select
+    Select,
+    Tabs,
+    TabList,
+    Tab,
+    TabPanels,
+    TabPanel
   ],
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.css'
@@ -85,7 +93,8 @@ export class ProductPageComponent implements OnInit
               private manufacturerService: ManufacturerService,
               private supplierService: SupplierService,
               private categoryService: CategoryService,
-              private toastService: ToastService) {
+              private toastService: ToastService,
+              private currentStoreService: CurrentStoreService){
 
 
 
@@ -177,10 +186,19 @@ export class ProductPageComponent implements OnInit
   }
 
 
+  getQuantityForCurrentStore(stockProducts: StockProductsModel[]): number {
+    const currentStore = this.currentStoreService.currentStore;
+    if (!currentStore) return 0;
+
+    const currentStoreStockId = currentStore.stock.id;
+    const stockProduct = stockProducts.find(sp => sp.stockId === currentStoreStockId);
+
+    return stockProduct?.quantity ?? 0;
+  }
+
 
   editProductClicked(product: ProductModel) {
     this.selectedProduct = { ...product };
-   // this.selectedManufacturer = this.getCategoryByCategoryId(subCategory.categoryId);
     this.editProductDialog = true;
   }
 

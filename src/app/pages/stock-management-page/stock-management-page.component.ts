@@ -128,7 +128,7 @@ export class StockManagementPageComponent implements OnInit
 
     this.isLoading = true;
     if (this.currentStoreService.currentStore?.id != null){
-      this.stockProductsService.GetStockProductsByStockId(this.currentStoreService.currentStore.stock.storeId).subscribe((data: StockProductsModel[]) => {
+      this.stockProductsService.GetStockProductsByStockId(this.currentStoreService.currentStore.stock.id).subscribe((data: StockProductsModel[]) => {
         this.availableStockProducts = data;
         this.isLoading = false;
       });

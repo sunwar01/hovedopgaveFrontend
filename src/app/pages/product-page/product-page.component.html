@@ -45,27 +45,21 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th>Id</th>
+          <th>Varenr.</th>
           <th>Navn</th>
-          <th>Pris</th>
-          <th>Nettopris</th>
           <th>Kategori</th>
-          <th>Producent</th>
-          <th>Leverandør</th>
-          <th>Leverandør produkt id</th>
+          <th>Lager</th>
+          <th>Pris</th>
           <th>Muligheder</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-product>
         <tr>
-          <td>{{ product.id }}</td>
-          <td>{{ product.name }}</td>
-          <td>{{ product.price }}</td>
-          <td>{{ product.netPrice }}</td>
-          <td>{{ product.category.name }}</td>
-          <td>{{ product.manufacturer.name }}</td>
-          <td>{{ product.supplier.name }}</td>
           <td>{{ product.supplierProductId }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.category.name }}</td>
+          <td>{{ getQuantityForCurrentStore(product.stockProducts) }}</td>
+          <td>{{ product.price }}</td>
           <td>
             <p-button
               icon="pi pi-pencil"
@@ -81,8 +75,14 @@
               [rounded]="true"
               [outlined]="true"
               (click)="deleteProductClicked(product)"
-
             />
+            <p-button
+              icon="pi pi-chart-bar"
+              severity="warn"
+              [rounded]="true"
+              [outlined]="true"
+            />
+
           </td>
         </tr>
       </ng-template>
@@ -200,93 +200,124 @@
       styleClass="p-fluid"
     >
       <ng-template pTemplate="content">
-        <div style="display: flex; flex-direction: column; min-height: 550px;" *ngIf="selectedProduct">
 
 
 
-          <p-inputgroup>
-            <p-inputgroup-addon>
-              <i class="pi pi-warehouse"></i>
-            </p-inputgroup-addon>
-            <p-floatlabel variant="in">
-              <input pInputText id="in_label_navnE" [(ngModel)]="selectedProduct.name" />
-              <label for="in_label_navnE">Navn</label>
-            </p-floatlabel>
-          </p-inputgroup>
+          <p-tabs value="0">
+            <p-tablist>
+              <p-tab value="0">Generelt</p-tab>
+              <p-tab value="1">Lager</p-tab>
+              <p-tab value="2">Stregkoder</p-tab>
+            </p-tablist>
+            <p-tabpanels>
+              <p-tabpanel value="0">
 
-          <p-inputgroup>
-            <p-inputgroup-addon>
-              <i class="pi pi-money-bill"></i>
-            </p-inputgroup-addon>
-            <p-floatlabel variant="in">
-              <input pInputText id="in_label_prisE" [(ngModel)]="selectedProduct.price" />
-              <label for="in_label_prisE">Pris</label>
-            </p-floatlabel>
-          </p-inputgroup>
+                <div style="display: flex; flex-direction: column; min-height: 550px;" *ngIf="selectedProduct">
+                <p-inputgroup>
+                  <p-inputgroup-addon>
+                    <i class="pi pi-warehouse"></i>
+                  </p-inputgroup-addon>
+                  <p-floatlabel variant="in">
+                    <input pInputText id="in_label_navnE" [(ngModel)]="selectedProduct.name" />
+                    <label for="in_label_navnE">Navn</label>
+                  </p-floatlabel>
+                </p-inputgroup>
 
-
-
-          <p-inputgroup>
-            <p-inputgroup-addon>
-              <i class="pi pi-money-bill"></i>
-            </p-inputgroup-addon>
-            <p-floatlabel variant="in">
-              <input pInputText id="in_label_nettoPrisE" [(ngModel)]="selectedProduct.netPrice" />
-              <label for="in_label_nettoPrisE">Nettopris</label>
-            </p-floatlabel>
-          </p-inputgroup>
+                <p-inputgroup>
+                  <p-inputgroup-addon>
+                    <i class="pi pi-money-bill"></i>
+                  </p-inputgroup-addon>
+                  <p-floatlabel variant="in">
+                    <input pInputText id="in_label_prisE" [(ngModel)]="selectedProduct.price" />
+                    <label for="in_label_prisE">Pris</label>
+                  </p-floatlabel>
+                </p-inputgroup>
 
 
 
-          <p-select [options]="availableCategories"
-                    [(ngModel)]="selectedCategory"
-                    optionLabel="name"
-                    [filter]="true" filterBy="name"
-                    [showClear]="true"
-                    placeholder="Vælg kategori"
-                    [virtualScroll]="true"
-                    [virtualScrollItemSize]="38"
-                    (ngModelChange)="selectedProduct.categoryId = $event?.id || null">
-
-          </p-select>
+                <p-inputgroup>
+                  <p-inputgroup-addon>
+                    <i class="pi pi-money-bill"></i>
+                  </p-inputgroup-addon>
+                  <p-floatlabel variant="in">
+                    <input pInputText id="in_label_nettoPrisE" [(ngModel)]="selectedProduct.netPrice" />
+                    <label for="in_label_nettoPrisE">Nettopris</label>
+                  </p-floatlabel>
+                </p-inputgroup>
 
 
-          <p-select [options]="availableManufacturers"
-                    [(ngModel)]="selectedManufacturer"
-                    optionLabel="name"
-                    [filter]="true" filterBy="name"
-                    [showClear]="true"
-                    placeholder="Vælg producent"
-                    [virtualScroll]="true"
-                    [virtualScrollItemSize]="38"
-                    (ngModelChange)="selectedProduct.manufacturerId = $event?.id || null">
 
-          </p-select>
+                <p-select [options]="availableCategories"
+                          [(ngModel)]="selectedCategory"
+                          optionLabel="name"
+                          [filter]="true" filterBy="name"
+                          [showClear]="true"
+                          placeholder="Vælg kategori"
+                          [virtualScroll]="true"
+                          [virtualScrollItemSize]="38"
+                          (ngModelChange)="selectedProduct.categoryId = $event?.id || null">
 
-          <p-select [options]="availableSuppliers"
-                    [(ngModel)]="selectedSupplier"
-                    optionLabel="name"
-                    [filter]="true" filterBy="name"
-                    [showClear]="true"
-                    placeholder="Vælg leverandør"
-                    [virtualScroll]="true"
-                    [virtualScrollItemSize]="38"
-                    (ngModelChange)="selectedProduct.supplierId = $event?.id || null">
-
-          </p-select>
+                </p-select>
 
 
-          <p-inputgroup>
-            <p-inputgroup-addon>
-              <i class="pi pi-key"></i>
-            </p-inputgroup-addon>
-            <p-floatlabel variant="in">
-              <input pInputText id="in_label_leverandoerProduktIdE" [(ngModel)]="selectedProduct.supplierProductId" />
-              <label for="in_label_leverandoerProduktIdE">Leverandør produkt id</label>
-            </p-floatlabel>
-          </p-inputgroup>
+                <p-select [options]="availableManufacturers"
+                          [(ngModel)]="selectedManufacturer"
+                          optionLabel="name"
+                          [filter]="true" filterBy="name"
+                          [showClear]="true"
+                          placeholder="Vælg producent"
+                          [virtualScroll]="true"
+                          [virtualScrollItemSize]="38"
+                          (ngModelChange)="selectedProduct.manufacturerId = $event?.id || null">
 
-        </div>
+                </p-select>
+
+                <p-select [options]="availableSuppliers"
+                          [(ngModel)]="selectedSupplier"
+                          optionLabel="name"
+                          [filter]="true" filterBy="name"
+                          [showClear]="true"
+                          placeholder="Vælg leverandør"
+                          [virtualScroll]="true"
+                          [virtualScrollItemSize]="38"
+                          (ngModelChange)="selectedProduct.supplierId = $event?.id || null">
+
+                </p-select>
+                <p-inputgroup>
+                  <p-inputgroup-addon>
+                    <i class="pi pi-key"></i>
+                  </p-inputgroup-addon>
+                  <p-floatlabel variant="in">
+                    <input pInputText id="in_label_leverandoerProduktIdE" [(ngModel)]="selectedProduct.supplierProductId" />
+                    <label for="in_label_leverandoerProduktIdE">Leverandør produkt id</label>
+                  </p-floatlabel>
+                </p-inputgroup>
+                </div>
+
+
+
+              </p-tabpanel>
+              <p-tabpanel value="1">
+                <div style="display: flex; flex-direction: column; min-height: 550px;" *ngIf="selectedProduct">
+                <p class="m-0">
+                  Lager
+                </p>
+                </div>
+              </p-tabpanel>
+              <p-tabpanel value="2">
+                <div style="display: flex; flex-direction: column; min-height: 550px;" *ngIf="selectedProduct">
+                <p class="m-0">
+                  Stregkoder
+                </p>
+                </div>
+              </p-tabpanel>
+            </p-tabpanels>
+          </p-tabs>
+
+
+
+
+
       </ng-template>
 
 
