@@ -12,10 +12,18 @@
            }">
 
 
-    <div *ngFor="let stateOption of stateOptions">
-        <p-radioButton name="state" [value]="stateOption.value" [(ngModel)]="selectedState"></p-radioButton>
-        <label>{{stateOption.label}}</label>
-    </div>
+    <p-tabs [(value)]="selectedState">
+      <p-tablist>
+        <p-tab *ngFor="let stateOption of stateOptions" [value]="stateOption.value">
+          {{ stateOption.label }}
+        </p-tab>
+      </p-tablist>
+    </p-tabs>
+
+
+
+
+
 
     <p-progress-spinner *ngIf="isLoading" ariaLabel="loading"></p-progress-spinner>
 
@@ -26,7 +34,7 @@
       [value]="availableStockProducts"
       selectionMode="single"
       [(selection)]="selectedStockProduct"
-      [globalFilterFields]="['product.name', 'product.manufacturer.name', 'product.supplier.name']"
+      [globalFilterFields]="['product.supplierProductId', 'product.name', 'product.manufacturer.name', 'product.supplier.name']"
       [scrollable]="true"
       scrollHeight="53vh"
       stripedRows
@@ -75,7 +83,7 @@
 
       <ng-template pTemplate="header">
         <tr>
-          <th>Id</th>
+          <th>Varenr.</th>
           <th>Navn</th>
           <th>Producent</th>
           <th>Leverandør</th>
@@ -89,7 +97,7 @@
 
       <ng-template pTemplate="body" let-stockProduct>
         <tr [pSelectableRow]="stockProduct">
-          <td>{{ stockProduct.id }}</td>
+          <td>{{ stockProduct.product.supplierProductId }}</td>
           <td>{{ stockProduct.product.name }}</td>
           <td>{{ stockProduct.product.manufacturer.name }}</td>
           <td>{{ stockProduct.product.supplier.name }}</td>
