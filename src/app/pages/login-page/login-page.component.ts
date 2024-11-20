@@ -3,13 +3,21 @@ import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/mat
 import {NgIf, NgOptimizedImage} from '@angular/common';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserService} from '../../core/services/api/user.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {CurrentUserService} from '../../core/services/currentUserService/currentUser.service';
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {first} from 'rxjs';
+import {CardModule} from 'primeng/card';
+import {ButtonModule} from 'primeng/button';
+import {PasswordModule} from 'primeng/password';
+import {FloatLabelModule} from 'primeng/floatlabel';
+import {InputTextModule} from 'primeng/inputtext';
+import {ThemeService} from '../../core/services/themeService/theme.service';
+import {ToastService} from '../../core/services/toastService/toast.service';
+import {ToastModule} from 'primeng/toast';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-login-page',
@@ -26,18 +34,31 @@ import {first} from 'rxjs';
     MatInput,
     MatError,
     MatButton,
-    NgIf
+    NgIf,
+    CardModule,
+    ButtonModule,
+    PasswordModule,
+    FloatLabelModule,
+    InputTextModule,
+    ToastModule,
+    ProgressSpinnerModule
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
 export class LoginPageComponent implements OnInit {
 
+  isLoading: boolean = false;
+
+  logoSrc: string = '/ps_logo.png';
 
   loginForm: FormGroup<{username: FormControl<string>, password: FormControl<string> }>;
 
-  constructor(private fb: FormBuilder, private userService: UserService, public snackBar: MatSnackBar, private router: Router, private currentUserService: CurrentUserService)
+  constructor(private fb: FormBuilder, private userService: UserService, private toastService: ToastService, private router: Router, private currentUserService: CurrentUserService, private themeService: ThemeService)
   {
+
+
+
     this.loginForm = this.fb.nonNullable.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -45,10 +66,17 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit() {
+
+
+
+
     if (this.loginForm.invalid)
     {
       return;
     }
+
+
+    this.isLoading = true;
 
     if (this.loginForm.value.username && this.loginForm.value.password)
     {
@@ -61,12 +89,7 @@ export class LoginPageComponent implements OnInit {
               this.loginForm.controls['username'].setErrors({invalid: true});
               this.loginForm.controls['password'].setErrors({invalid: true});
 
-
-              this.snackBar.open('Invalid login credentials.', 'Luk', {
-                duration: 3000,
-                verticalPosition: 'top',
-              });
-
+              this.toastService.showError("Forkert login");
 
             },
             next: (response) =>
@@ -77,18 +100,17 @@ export class LoginPageComponent implements OnInit {
             },
             complete: () =>
             {
-              this.snackBar.open('Login successful', 'Luk', {
-                duration: 3000,
-                verticalPosition: 'top',
-              });
-
-
 
               this.router.navigate(['/select-store']);
 
+
             }
 
+
           });
+
+         this.isLoading = false;
+
 
     }
   }
@@ -97,6 +119,15 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void
   {
+
+
+
+
+
+
+    this.themeService.darkMode$.subscribe((isDarkMode) => {
+      this.logoSrc = isDarkMode ? "/ps_logo_hvid.png" : "/ps_logo.png";
+    });
 
     this.currentUserService.currentUser$
       .pipe(first(currentUser => currentUser !== null))

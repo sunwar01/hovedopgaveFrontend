@@ -4,6 +4,7 @@ import {TopMenuComponent} from './components/top-menu/top-menu.component';
 import {NgIf} from '@angular/common';
 import {PrimeNGConfig} from 'primeng/api';
 import { Aura } from 'primeng/themes/aura';
+import {ThemeService} from './core/services/themeService/theme.service';
 
 
 
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit{
 
   showHeader: boolean = true;
 
-  constructor(private router: Router, private config: PrimeNGConfig)
+  constructor(private router: Router, private config: PrimeNGConfig, private themeService: ThemeService)
   {
 
     this.config.theme.set({ preset: Aura });
@@ -43,20 +44,7 @@ export class AppComponent implements OnInit{
 
 
 
-
-    const applyTheme = (prefersDark: boolean) => {
-      document.body.classList.toggle('dark-theme', prefersDark);
-      document.body.classList.toggle('light-theme', !prefersDark);
-    };
-
-    // Apply theme on load
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    applyTheme(prefersDark);
-
-
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-      applyTheme(event.matches);
-    });
+    this.themeService.initializeTheme();
 
 
     this.config.ripple.set(true);

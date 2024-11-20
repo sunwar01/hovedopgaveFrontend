@@ -65,6 +65,8 @@ export class ManufacturerPageComponent implements OnInit {
 
   ngOnInit(): void
   {
+;
+
 
     this.updateManufacturerList();
 
@@ -105,6 +107,7 @@ export class ManufacturerPageComponent implements OnInit {
 
 
   editManufacturerClicked(manufacturer: ManufacturerModel) {
+
     this.selectedManufacturer = { ...manufacturer };
     this.editManufacturerDialog = true;
   }

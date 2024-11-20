@@ -3,50 +3,44 @@
 
 
 <div class="login-container">
-<mat-card>
-  <mat-card-header>
-    <img ngSrc="/ps_logo.png" priority alt="companyLogo" width="200"  height="126">
-  </mat-card-header>
-  <mat-card-content>
+  <p-toast />
+  <p-card>
+    <ng-template pTemplate="header">
+      <img alt="Card" [src]="logoSrc"/>
+    </ng-template>
+    <ng-template pTemplate="title"> RepairPos </ng-template>
 
 
-    <mat-card-title>RepairPos</mat-card-title>
+    <p-progress-spinner *ngIf="isLoading" ariaLabel="loading"></p-progress-spinner>
+
+    <ng-template pTemplate="content">
+      <div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-      <mat-form-field>
-        <mat-label>Brugernavn</mat-label>
-        <input matInput placeholder="Skriv dit brugernavn" formControlName="username">
-        <mat-error *ngIf="loginForm.controls.username.hasError('required')">
-          Brugernavn er påkrævet
-        </mat-error>
-      </mat-form-field>
+          <p-floatlabel variant="on">
+            <input pInputText id="on_label" formControlName="username" autocomplete="off" />
+            <label for="on_label">Brugernavn</label>
+          </p-floatlabel>
 
 
-      <mat-form-field>
-        <mat-label>Adgangskode</mat-label>
-        <input matInput type="password" placeholder="Skriv din adgangskode" formControlName="password">
-        <mat-error *ngIf="loginForm.controls.password.hasError('required')">
-          adgangskode er påkrævet
-        </mat-error>
-      </mat-form-field>
+          <p-floatlabel variant="on">
+            <p-password  formControlName="password"  [toggleMask]="true" [feedback]="false" />
+            <label for="on_label">Kodeord</label>
+          </p-floatlabel>
 
 
-      <div class="login-button">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
-        Log ind
-      </button>
+          <p-button label="Log ind" type="submit" [disabled]="!loginForm.valid"/>
+
+        </form>
       </div>
+    </ng-template>
 
-    </form>
-
-
-
-  </mat-card-content>
+  </p-card>
 
 
-</mat-card>
+
+
 
 
 </div>
