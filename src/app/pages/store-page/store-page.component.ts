@@ -3,14 +3,21 @@ import {MatButton} from "@angular/material/button";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
 import {StoreModel} from '../../core/models/storeRelated/store.model';
-import {CurrentUserService} from '../../core/services/currentUserService/currentUser.service';
+
 import {Router} from '@angular/router';
 import {StoreService} from '../../core/services/api/store.service';
 import {CurrentStoreService} from '../../core/services/currentStoreService/currentStore.service';
 import {MatGridList, MatGridTile} from '@angular/material/grid-list';
+import {ButtonModule} from 'primeng/button';
+import {CardModule} from 'primeng/card';
+import {FloatLabelModule} from 'primeng/floatlabel';
+import {InputTextModule} from 'primeng/inputtext';
+import {PasswordModule} from 'primeng/password';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {SharedModule} from 'primeng/api';
 
 @Component({
   selector: 'app-store-page',
@@ -30,7 +37,15 @@ import {MatGridList, MatGridTile} from '@angular/material/grid-list';
     ReactiveFormsModule,
     MatGridList,
     MatGridTile,
-    NgForOf
+    NgForOf,
+    ButtonModule,
+    CardModule,
+    FloatLabelModule,
+    InputTextModule,
+    PasswordModule,
+    ProgressSpinnerModule,
+    SharedModule,
+    NgStyle
   ],
   templateUrl: './store-page.component.html',
   styleUrl: './store-page.component.css'
@@ -38,9 +53,11 @@ import {MatGridList, MatGridTile} from '@angular/material/grid-list';
 export class StorePageComponent implements OnInit
 {
 
+  tileColor = '';
+
   availableStores: StoreModel[] = [];
 
-  constructor(private router: Router, private currentUser: CurrentUserService, private storeService: StoreService, private currentStore: CurrentStoreService)
+  constructor(private router: Router, private storeService: StoreService, private currentStore: CurrentStoreService)
   {
   }
 
@@ -64,6 +81,10 @@ export class StorePageComponent implements OnInit
       }
 
     });
+
+
+
+
   }
 
 }

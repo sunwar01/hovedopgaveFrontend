@@ -2,32 +2,36 @@
 <html lang="dk">
 
 <div class="store-page-container">
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Vælg butik</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-grid-list  cols="3" rowHeight="1:1" [gutterSize]="'2vh'">
-      <mat-grid-tile  *ngFor="let store of availableStores" (click)="StoreClicked(store)">
-
-        <div>
-          <h1>{{store.name}}</h1>
-          <p>{{store.city}}</p>
-
-          <img [ngSrc]="store.picture" priority alt="Store Image" width="200" height="150"/>
 
 
-        </div>
+
+  <p-card>
+    <ng-template pTemplate="title"> Vælg butik </ng-template>
 
 
-      </mat-grid-tile>
-    </mat-grid-list>
 
 
-  </mat-card-content>
+    <ng-template pTemplate="content">
+      <div>
+        <mat-grid-list  cols="3" rowHeight="1:1" [gutterSize]="'2vh'">
+          <mat-grid-tile [ngStyle]="{ 'border': '1px solid'}" *ngFor="let store of availableStores" (click)="StoreClicked(store)">
+            <div>
+              <h1>{{store.name}}</h1>
+              <p>{{store.city}}</p>
+
+              <img [ngSrc]="store.picture" priority alt="Store Image" width="200" height="150"/>
+
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </ng-template>
+
+  </p-card>
 
 
-</mat-card>
+
+
 
 </div>
 
