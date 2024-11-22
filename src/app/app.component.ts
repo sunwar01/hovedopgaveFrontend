@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {TopMenuComponent} from './components/top-menu/top-menu.component';
 import {NgIf} from '@angular/common';
 import {PrimeNGConfig} from 'primeng/api';
 import { Aura } from 'primeng/themes/aura';
 import {ThemeService} from './core/services/themeService/theme.service';
+import {MenuBarComponent} from './components/menu-bar/menu-bar.component';
 
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TopMenuComponent, NgIf],
+  imports: [RouterOutlet, NgIf, MenuBarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -1,21 +1,15 @@
 .flex {
   display: flex;
   justify-content: space-between;
-
-
 }
 
 .category-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-
-
+  align-items: center;
+  height: 100vh;
+  background: #007bff;
 }
 
 
-p-card
-{
-  margin-top : 12vh;
-}
+

@@ -6,7 +6,9 @@
 
 
   <p-card>
-    <ng-template pTemplate="title"> Vælg butik </ng-template>
+    <ng-template pTemplate="title">
+        <h2>Vælg butik</h2>
+    </ng-template>
 
 
 
@@ -14,7 +16,7 @@
     <ng-template pTemplate="content">
       <div>
         <mat-grid-list  cols="3" rowHeight="1:1" [gutterSize]="'2vh'">
-          <mat-grid-tile [ngStyle]="{ 'border': '1px solid'}" *ngFor="let store of availableStores" (click)="StoreClicked(store)">
+          <mat-grid-tile *ngFor="let store of availableStores" (click)="StoreClicked(store)">
             <div>
               <h1>{{store.name}}</h1>
               <p>{{store.city}}</p>

@@ -1,0 +1,72 @@
+<p-toolbar
+  [style]="{
+
+    'padding': '1rem 1rem 1rem 1.5rem',
+    'display': 'flex',
+    'justify-content': 'space-between',
+    'align-items': 'center',
+    'gap': '1rem'
+  }"
+>
+
+  <ng-template  pTemplate="start">
+    <p-image alt="Logo" [src]="logoSrc"/>
+  </ng-template>
+
+
+  <ng-template pTemplate="center">
+    <div
+      [style]="{
+        'display': 'flex',
+        'gap': '1rem',
+        'margin-right': '8rem'
+      }"
+    >
+    <p-button [style]="{ 'width': '10rem' }" label="Kasse" text plain icon="pi pi-money-bill" iconPos="top"  (click)="kasseMenu.toggle($event)"/>
+    <p-menu #kasseMenu [model]="kasseItems" [popup]="true"/>
+
+
+
+
+    <p-button [style]="{ 'width': '10rem' }" label="Service & Rma" text plain icon="pi pi-wrench" iconPos="top" (click)="servicermaMenu.toggle($event)"/>
+    <p-menu #servicermaMenu [model]="servicermaItems" [popup]="true"/>
+
+
+
+
+
+    <p-button [style]="{ 'width': '10rem' }"  label="Varer" text plain icon="pi pi-search" iconPos="top" (click)="varerMenu.toggle($event)"/>
+    <p-menu #varerMenu [model]="varerItems" [popup]="true"/>
+
+
+
+    <p-button [style]="{ 'width': '10rem' }" label="Lager" text plain icon="pi pi-warehouse" iconPos="top" (click)="lagerMenu.toggle($event)"/>
+    <p-menu #lagerMenu [model]="lagerItems" [popup]="true"/>
+
+
+
+
+
+    <p-button [style]="{ 'width': '10rem' }" label="Rapporter" text plain icon="pi pi-clipboard" iconPos="top" (click)="rapporterMenu.toggle($event)"/>
+    <p-menu #rapporterMenu [model]="rapporterItems" [popup]="true"/>
+
+
+
+    <p-button [style]="{ 'width': '10rem' }" label="Genveje" text plain icon="pi pi-bolt" iconPos="top" [routerLink]="'/main'"/>
+    </div>
+
+
+  </ng-template>
+
+
+
+
+  <ng-template pTemplate="end">
+    <div class="Profile">
+  <p-overlay-badge value="4" severity="danger">
+    <p-avatar  label="U" size="xlarge" />
+  </p-overlay-badge>
+    </div>
+  </ng-template>
+
+</p-toolbar>

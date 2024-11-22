@@ -18,6 +18,7 @@ import {ThemeService} from '../../core/services/themeService/theme.service';
 import {ToastService} from '../../core/services/toastService/toast.service';
 import {ToastModule} from 'primeng/toast';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {ImageModule} from 'primeng/image';
 
 @Component({
   selector: 'app-login-page',
@@ -41,7 +42,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     FloatLabelModule,
     InputTextModule,
     ToastModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ImageModule
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'

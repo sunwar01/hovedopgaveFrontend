@@ -4,9 +4,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top : 20vh;
-
+  text-align: center;
+  height: 100vh;
 }
+
 
 p-card
 {
@@ -19,20 +20,20 @@ p-card
 
 h1
 {
-  font-size: 10px;
+  font-size: 15px;
 }
 
 p
 {
-  font-size: 10px;
+  font-size: 12px;
 
 }
 
 img
 {
   border-radius: 10px;
-  max-height: 100px;
-  max-width: 100px;
+  max-height: 102px;
+  max-width: 136px;
 
 }
 
@@ -43,12 +44,12 @@ mat-grid-tile
   width : auto;
   height : auto;
   border-radius: 10px;
+  border : 1px solid ;
 }
 
 mat-grid-tile:hover
 {
-
-  opacity: 0.5;
+  transform: scale(1.05);
   cursor: pointer;
 }
 
