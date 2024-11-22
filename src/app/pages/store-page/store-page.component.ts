@@ -18,6 +18,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {PasswordModule} from 'primeng/password';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {SharedModule} from 'primeng/api';
+import {ThemeService} from '../../core/services/themeService/theme.service';
 
 @Component({
   selector: 'app-store-page',
@@ -53,13 +54,15 @@ import {SharedModule} from 'primeng/api';
 export class StorePageComponent implements OnInit
 {
 
-  tileColor = '';
+  tileBorderColor = '';
 
   availableStores: StoreModel[] = [];
 
-  constructor(private router: Router, private storeService: StoreService, private currentStore: CurrentStoreService)
+  constructor(private router: Router, private storeService: StoreService, private currentStore: CurrentStoreService, private themeService: ThemeService)
   {
   }
+
+
 
 
   StoreClicked(store: StoreModel)
@@ -82,6 +85,12 @@ export class StorePageComponent implements OnInit
 
     });
 
+
+
+
+    this.themeService.darkMode$.subscribe((isDarkMode) => {
+      this.tileBorderColor = isDarkMode ? "#3f3f46" : "#e2e8f0";
+    });
 
 
 

@@ -10,3 +10,13 @@
 {
   margin-right: 1rem;
 }
+
+
+p-button {
+  transition: transform 0.3s;
+}
+
+p-button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}

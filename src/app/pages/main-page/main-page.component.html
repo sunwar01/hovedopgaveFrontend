@@ -5,19 +5,17 @@
 
 <div class="shortcut-container">
 <p-card>
-<mat-grid-list  cols="3" rowHeight="1:1" [gutterSize]="'1vw'">
-
-  <mat-grid-tile>Kasse (salg)</mat-grid-tile>
-  <mat-grid-tile>Opret ny sag</mat-grid-tile>
-  <mat-grid-tile>Søg efter sag</mat-grid-tile>
-  <mat-grid-tile>Deadline oversigt</mat-grid-tile>
-  <mat-grid-tile>Vis seneste sager</mat-grid-tile>
-  <mat-grid-tile>Vis uafsluttede sager</mat-grid-tile>
-  <mat-grid-tile [routerLink]="'/products'">Varer</mat-grid-tile>
-  <mat-grid-tile [routerLink]="'/stock-management'">Administrer lagerbeholdning</mat-grid-tile>
-  <mat-grid-tile (click)="Logout()">Find kvittering</mat-grid-tile>
-
-</mat-grid-list>
+  <div class="button-grid">
+    <p-button severity="secondary"
+      [style]="{width: '15rem', height: '15rem'}"
+      *ngFor="let tile of tiles"
+      [label]="tile.title"
+      [icon]="tile.icon"
+      iconPos="top"
+      [routerLink]="tile.link || null"
+      (click)="tile.action ? tile.action() : null">
+    </p-button>
+  </div>
 </p-card>
 
 </div>

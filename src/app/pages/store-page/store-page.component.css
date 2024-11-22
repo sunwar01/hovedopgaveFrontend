@@ -8,50 +8,35 @@
   height: 100vh;
 }
 
+h1 {
 
-p-card
-{
-  width: 60vh;
-  height: auto;
-  padding: 1.5vh;
-  border-radius: 2vh;
+  font-size : 1.5rem;
+}
+
+h2 {
+
+  font-size : 1rem;
+}
+
+img {
+  object-fit: cover;
+  border-radius: 6px;
 }
 
 
-h1
-{
-  font-size: 15px;
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2vh;
 }
 
-p
-{
-  font-size: 12px;
+p-button {
 
+  transition: transform 0.3s;
 }
 
-img
-{
-  border-radius: 10px;
-  max-height: 102px;
-  max-width: 136px;
-
-}
-
-
-mat-grid-tile
-{
-  text-align: center;
-  width : auto;
-  height : auto;
-  border-radius: 10px;
-  border : 1px solid ;
-}
-
-mat-grid-tile:hover
-{
+p-button:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
-
-
 

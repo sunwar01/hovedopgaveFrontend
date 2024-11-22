@@ -52,11 +52,17 @@ export class MenuBarComponent implements OnInit {
   logoSrc: string = '/ps_logo.png';
 
 
+
   kasseItems: MenuItem[] | undefined;
   servicermaItems: MenuItem[] | undefined;
   varerItems: MenuItem[] | undefined;
   lagerItems: MenuItem[] | undefined;
   rapporterItems: MenuItem[] | undefined;
+
+
+
+
+
 
   ngOnInit() {
 
@@ -64,6 +70,7 @@ export class MenuBarComponent implements OnInit {
     this.themeService.darkMode$.subscribe((isDarkMode) => {
       this.logoSrc = isDarkMode ? "/ps_logo_hvid.png" : "/ps_logo.png";
     });
+
 
 
     this.kasseItems = [

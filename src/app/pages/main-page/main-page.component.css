@@ -5,30 +5,24 @@
   justify-content: center;
   align-items: center;
   margin-top : 12vh;
-
-
-
 }
 
-
-
-p-card
-{
-  width: 60vh;
-  height: auto;
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 1vw; /* Space between buttons */
+  justify-items: center; /* Center align buttons */
 }
 
-
-mat-grid-tile {
-  text-align: center;
-  width : auto;
-  height : auto;
-  border-radius: 15px;
-  border : 1px solid ;
+p-button {
+  transition-duration: 0.3s;
 }
 
-mat-grid-tile:hover {
+p-button:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
+
+
+
 
