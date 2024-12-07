@@ -1,0 +1,39 @@
+.flex {
+  display: flex;
+  justify-content: space-between;
+
+
+}
+
+.counter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-content {
+  display: flex; /* Use flexbox layout */
+  width: 100%;
+}
+
+.left-panel {
+  flex: 0 0 75%; /* Take up 75% of the width */
+  padding: 10px;
+}
+
+.right-panel {
+  flex: 0 0 25%; /* Take up 25% of the width */
+  padding: 10px;
+}
+
+.divider {
+  height: 100%; /* Make the divider span the full height */
+  margin: 0 10px; /* Optional: add spacing around the divider */
+}
+
+
+p-card
+{
+  margin-top : 12vh;
+}

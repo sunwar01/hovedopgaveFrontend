@@ -34,7 +34,7 @@ export class MainPageComponent implements OnInit
   tileBorderColor = '';
 
   tiles = [
-    { title: 'Kasse (salg)', icon: 'pi pi-shopping-cart' },
+    { title: 'Kasse (salg)', icon: 'pi pi-shopping-cart', link: '/counter' },
     { title: 'Opret ny sag', icon: 'pi pi-plus' },
     { title: 'Søg efter sag', icon: 'pi pi-search' },
     { title: 'Deadline oversigt', icon: 'pi pi-calendar' },

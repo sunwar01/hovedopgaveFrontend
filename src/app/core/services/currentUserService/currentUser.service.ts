@@ -36,6 +36,15 @@ export class CurrentUserService
   }
 
 
+  public getCurrentUserId(): number | null
+  {
+    const user = this.currentUserSubject.getValue();
+    if (user)
+    {
+      return user.id;
+    }
+    return null;
+  }
 
   public getCurrentUser():Observable<UserModel | null>
   {

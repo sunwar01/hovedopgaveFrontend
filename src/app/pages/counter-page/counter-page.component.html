@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+<div class="counter-container">
+  <p-toast />
+  <p-card header="Kasse"
+          [style]="
+          {'max-width': '80rem',
+           'border-radius': '2vh',
+           'min-width': '80rem',
+           }">
+
+
+    <div class="card-content">
+<div class="left-panel">
+
+    <p-listbox
+
+      [options]="availableStockProducts"
+      [(ngModel)]="selectedStockProduct"
+      optionLabel="product.name"
+      [filter]="true"
+      (onChange)="addToSelectedStockProducts($event)"
+      />
+
+
+    <p-table
+      [scrollable]="true"
+      scrollHeight="53vh"
+      [value]="selectedStockProducts"
+      stripedRows
+      [rows]="10">
+
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Varenr.</th>
+          <th>Navn</th>
+          <th>Pris</th>
+          <th>Antal</th>
+          <th>Type</th>
+          <th>Muligheder</th>
+        </tr>
+      </ng-template>
+
+
+      <ng-template pTemplate="body" let-stockProduct>
+        <tr [pSelectableRow]="stockProduct">
+          <td>{{ stockProduct.product.supplierProductId }}</td>
+          <td>{{ stockProduct.product.name }}</td>
+          <td>{{ stockProduct.product.price }}</td>
+          <td>
+            <input
+              type="number"
+              [(ngModel)]="stockProduct.quantity"
+              (ngModelChange)="onQuantityChange(stockProduct)"
+              [min]="1"
+              style="width: 60px"
+            />
+          </td>
+          <td>{{ stockProduct.type }}</td>
+          <td>
+            <p-button
+              icon="pi pi-times"
+              severity="danger"
+              (click)="removeFromSelectedStockProducts(stockProduct)">
+            </p-button>
+          </td>
+        </tr>
+      </ng-template>
+
+
+
+    </p-table>
+
+</div>
+
+    <p-divider type="solid"  layout="vertical"/>
+
+    <div class="right-panel">
+
+
+
+      <p-button
+        label="Sælg vare"
+        (click)="selectSaleType(1)"
+        [styleClass]="selectedSaleType === 1 ? 'p-button-primary' : 'p-button-outlined'">
+      </p-button>
+
+      <p-button
+        label="Vare retur"
+        severity="danger"
+        (click)="selectSaleType(3)"
+        [styleClass]="selectedSaleType === 3 ? 'p-button-danger' : 'p-button-outlined'">
+      </p-button>
+
+      <p-divider type="solid" layout="horizontal" />
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="in_label_balance"  type="number"  [(ngModel)]="balance" />
+          <label for="in_label_balance">Balance</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="in_label_betaling"  type="number"  [(ngModel)]="betaling" />
+          <label for="in_label_betaling">Betaling</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+
+      <p-button
+        label="Kontant"
+        [disabled]="selectedStockProducts.length === 0"
+        (click)="selectPaymentType(PaymentType.Cash)">
+
+      </p-button>
+
+
+      <p-button
+        label="Kort" [disabled]="selectedStockProducts.length === 0"
+        (click)="selectPaymentType(PaymentType.Card)">
+
+
+      </p-button>
+
+      <p-button
+        label="MobilePay" [disabled]="selectedStockProducts.length === 0"
+        (click)="selectPaymentType(PaymentType.MobilePay)">
+
+      </p-button>
+
+      <p-button
+        label="Faktura" [disabled]="selectedStockProducts.length === 0"
+        (click)="selectPaymentType(PaymentType.Invoice)">
+
+      </p-button>
+
+
+      <p-divider type="solid" layout="horizontal" />
+
+      <p-table
+        [scrollable]="true"
+        scrollHeight="53vh"
+        [value]="payments"
+        stripedRows
+        [rows]="4">
+
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Type.</th>
+            <th>Beløb</th>
+            <th>Muligheder</th>
+          </tr>
+        </ng-template>
+
+
+        <ng-template pTemplate="body" let-payment>
+          <tr [pSelectableRow]="payment">
+            <td>{{ getEnumName(payment.paymentType) }}</td>
+            <td>{{ payment.amount }}</td>
+            <td>
+              <p-button
+                icon="pi pi-times"
+                severity="danger"
+                (click)="removePayment(payment)"
+                >
+              </p-button>
+          </tr>
+        </ng-template>
+
+
+
+      </p-table>
+
+      <p-button
+        label="Afslut salg"
+        [disabled]="selectedStockProducts.length === 0 || balance !== 0 || betaling !== 0"
+        (click)="createNewReceipt()">
+
+      </p-button>
+
+
+
+
+
+    </div>
+
+    </div>
+
+  </p-card>
+
+
+</div>
+
+
+</html>

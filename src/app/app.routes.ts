@@ -7,6 +7,7 @@ import {CategoryPageComponent} from './pages/category-page/category-page.compone
 import {ManufacturerPageComponent} from './pages/manufacturer-page/manufacturer-page.component';
 import {ProductPageComponent} from './pages/product-page/product-page.component';
 import {StockManagementPageComponent} from './pages/stock-management-page/stock-management-page.component';
+import {CounterPageComponent} from './pages/counter-page/counter-page.component';
 
 export const routes: Routes = [
 
@@ -35,6 +36,13 @@ export const routes: Routes = [
    *           Stock Related                 *
    * *****************************************/
   { path: 'stock-management', component: StockManagementPageComponent},
+
+  /*******************************************
+   *           Counter Related               *
+   * *****************************************/
+  { path: 'counter', component: CounterPageComponent},
+
+
 
 
 

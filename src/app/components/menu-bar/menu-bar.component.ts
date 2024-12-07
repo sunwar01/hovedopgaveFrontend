@@ -79,7 +79,8 @@ export class MenuBarComponent implements OnInit {
         items: [
           {
             label: 'Kasse (salg)',
-            icon: 'pi pi-refresh'
+            icon: 'pi pi-refresh',
+            routerLink: '/counter'
           },
           {
             label: 'Kassefunktioner',
