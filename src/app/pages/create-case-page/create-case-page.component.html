@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+<div class="create-case-container">
+  <p-toast />
+  <p-card header="Opret sag"
+          [style]="
+          {'max-width': '50rem',
+           'border-radius': '2vh',
+           'min-width': '40rem',
+           'max-height': '50rem',
+           'overflow': 'auto'
+           }">
+
+
+    <p-card  subheader="Kundeoplysninger" [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
+
+
+
+      <p-inputgroup  [style]="{ 'margin-bottom': '2rem'}">
+      <p-floatlabel variant="in">
+
+        <p-autoComplete
+          [(ngModel)]="selectedCustomer"
+          [suggestions]="filteredCustomers"
+          (completeMethod)="filterCustomers($event)"
+          (ngModelChange)="onCustomerSelectionChange($event)"
+          optionLabel="displayLabel"
+          id="customerSearch"
+          [style]="{ 'width': '100%'}">
+        </p-autoComplete>
+        <label for="customerSearch">Søg efter eksisterende kunde</label>
+
+
+
+      </p-floatlabel>
+        <p-inputgroup-addon (click)="clearCustomer()">
+          <i class="pi pi-times" style="cursor: pointer;"></i>
+        </p-inputgroup-addon>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="customerName" [(ngModel)]="customerName"/>
+          <label for="customerName">Navn</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="customerMail" [(ngModel)]="customerMail"/>
+          <label for="customerMail">Mail</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="customerPhone" [(ngModel)]="customerPhone"/>
+          <label for="customerPhone">Telefon nr.</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+
+    </p-card>
+
+    <p-card  subheader="Sagsoplysninger"  [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="repairModel" [(ngModel)]="repairModel" />
+          <label for="repairModel">Model</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="repairDesc" [(ngModel)]="repairDesc"  />
+          <label for="repairDesc">Beskrivelse</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="repairPrice" [(ngModel)]="repairPrice" />
+          <label for="repairPrice">Aftalt pris / tilbud</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="repairVMI" [(ngModel)]="repairVMI" />
+          <label for="repairVMI">VMI - Har enheden nogle fysiske skader ved indlevering?</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="repairEstimate" [(ngModel)]="repairEstimate"/>
+          <label for="repairEstimate">Oplyst estimat på sagen (Tid)</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+    </p-card>
+
+    <p-card  subheader="Detaljer"  [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="detailsPassword" [(ngModel)]="detailsPassword"/>
+          <label for="detailsPassword">Låsekode</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="detailsPin" [(ngModel)]="detailsPin" />
+          <label for="detailsPin">Pinkode</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="detailsMailLogin" [(ngModel)]="detailsMailLogin"/>
+          <label for="detailsMailLogin">E-mail Apple ID / Google konto</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="detailsPasswordLogin" [(ngModel)]="detailsPasswordLogin" />
+          <label for="detailsPasswordLogin">Kode Apple ID / Google kode</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="detailsIMEI" [(ngModel)]="detailsIMEI"/>
+          <label for="detailsIMEI">IMEI / serie-nummer</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="detailsAlreadyPaid" [(ngModel)]="detailsAlreadyPaid"/>
+          <label for="detailsAlreadyPaid">Allerede betalt? - Indtast BONID</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+
+    </p-card>
+
+    <p-button label="Opret sag" (click)="createCase()" [style]=" {'margin-top': '2vh'}">
+
+
+    </p-button>
+
+
+
+
+
+
+  </p-card>
+
+
+</div>
+
+
+</html>

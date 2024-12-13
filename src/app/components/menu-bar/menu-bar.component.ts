@@ -110,7 +110,8 @@ export class MenuBarComponent implements OnInit {
         items: [
           {
             label: 'Opret ny sag',
-            icon: 'pi pi-refresh'
+            icon: 'pi pi-refresh',
+            routerLink: '/create-case'
           },
           {
             label: 'Søg efter sag',

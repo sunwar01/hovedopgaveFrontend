@@ -8,6 +8,7 @@ import {ManufacturerPageComponent} from './pages/manufacturer-page/manufacturer-
 import {ProductPageComponent} from './pages/product-page/product-page.component';
 import {StockManagementPageComponent} from './pages/stock-management-page/stock-management-page.component';
 import {CounterPageComponent} from './pages/counter-page/counter-page.component';
+import {CreateCasePageComponent} from './pages/create-case-page/create-case-page.component';
 
 export const routes: Routes = [
 
@@ -41,6 +42,13 @@ export const routes: Routes = [
    *           Counter Related               *
    * *****************************************/
   { path: 'counter', component: CounterPageComponent},
+
+
+  /*******************************************
+   *           Case Related                  *
+   * *****************************************/
+
+  { path: 'create-case', component: CreateCasePageComponent},
 
 
 
