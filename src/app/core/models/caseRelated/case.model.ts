@@ -1,5 +1,9 @@
 import {CaseType} from '../../enums/caseType.enum';
 import {CaseStatus} from '../../enums/caseStatus.enum';
+import {StoreModel} from '../storeRelated/store.model';
+import {UserModel} from '../userRelated/user.model';
+import {CustomerModel} from '../customerRelated/customer.model';
+import {CaseContentModel} from '../caseContentRelated/caseContent.model';
 
 export interface CaseModel {
   id: number;
@@ -9,4 +13,10 @@ export interface CaseModel {
   customerId: number;
   Type: CaseType;
   isDeleted: boolean;
+
+  store: StoreModel;
+  customer: CustomerModel;
+  user : UserModel;
+  caseContent: CaseContentModel[];
+
 }

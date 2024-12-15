@@ -115,7 +115,8 @@ export class MenuBarComponent implements OnInit {
           },
           {
             label: 'Søg efter sag',
-            icon: 'pi pi-times'
+            icon: 'pi pi-times',
+            routerLink: '/find-case'
           },
           {
             label: 'Deadline oversigt',

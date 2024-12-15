@@ -36,7 +36,7 @@ export class MainPageComponent implements OnInit
   tiles = [
     { title: 'Kasse (salg)', icon: 'pi pi-shopping-cart', link: '/counter' },
     { title: 'Opret ny sag', icon: 'pi pi-plus', link: '/create-case' },
-    { title: 'Søg efter sag', icon: 'pi pi-search' },
+    { title: 'Søg efter sag', icon: 'pi pi-search', link: '/find-case' },
     { title: 'Deadline oversigt', icon: 'pi pi-calendar' },
     { title: 'Vis seneste sager', icon: 'pi pi-clock' },
     { title: 'Vis uafsluttede sager', icon: 'pi pi-exclamation-circle' },

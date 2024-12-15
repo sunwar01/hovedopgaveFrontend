@@ -153,7 +153,6 @@ export class CreateCasePageComponent implements OnInit {
 
 
     const caseContents = caseContentFields
-      .filter(field => field.content) // vi vil ikke sende tomme felter
       .map(field => ({
         fieldId: field.fieldId,
         content: field.content

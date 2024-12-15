@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+<div class="find-case-container">
+  <p-toast />
+  <p-card header="Søg efter sag"
+          [style]="
+          {'max-width': '80rem',
+           'border-radius': '2vh',
+           'min-width': '80rem',
+            'min-height': '50rem',
+            'max-height': '50rem',
+
+
+           }">
+
+    <p-table
+      #productTable
+      [value]="availableCases"
+      [globalFilterFields]="['id']"
+      [scrollable]="true"
+      scrollHeight="53vh"
+      stripedRows>
+
+
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <p-iconfield iconPosition="left">
+            <p-inputicon>
+              <i class="pi pi-search"></i>
+            </p-inputicon>
+            <input
+              pInputText
+              type="text"
+              (input)="productTable.filterGlobal($any($event.target).value, 'contains')"
+              placeholder="Søg"
+            />
+          </p-iconfield>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Sags nr.</th>
+          <th>Oprettet</th>
+          <th>Emne</th>
+          <th>Kunde</th>
+          <th>Butik</th>
+          <th>Status</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-theCase>
+        <tr *ngIf="productTable.filteredValue?.length" (click)="caseSelected(theCase)" style="cursor: pointer;">
+          <td>{{ theCase.id }}</td>
+          <td>{{ theCase.createdAt | date: 'dd-MM-yyyy HH:mm' }}</td>
+          <td>{{ theCase.caseContent && theCase.caseContent.length > 0 ? theCase.caseContent[0].content : 'No content available' }}</td>
+          <td>{{ theCase.customer.name }}</td>
+          <td>{{ theCase.store.name }}</td>
+          <td>{{ getStatusText(theCase.status) }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <div *ngIf="!productTable.filteredValue?.length" class="no-results">
+      <i class="pi pi-search-minus"></i>
+      <p>Ingen sager matcher din søgning.</p>
+    </div>
+
+
+
+  </p-card>
+
+
+</div>
+
+
+</html>
