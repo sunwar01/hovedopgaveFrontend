@@ -87,10 +87,6 @@ export class MenuBarComponent implements OnInit {
             icon: 'pi pi-upload'
           },
           {
-            label: 'Parkerede kvitteringer',
-            icon: 'pi pi-upload'
-          },
-          {
             label: 'Find kvittering',
             icon: 'pi pi-upload'
           },
@@ -119,12 +115,9 @@ export class MenuBarComponent implements OnInit {
             routerLink: '/find-case'
           },
           {
-            label: 'Deadline oversigt',
-            icon: 'pi pi-times'
-          },
-          {
             label: 'Vis seneste sager',
-            icon: 'pi pi-times'
+            icon: 'pi pi-times',
+            routerLink: '/latest-cases'
           },
           {
             label: 'Vis uafsluttede sager',
@@ -183,15 +176,7 @@ export class MenuBarComponent implements OnInit {
             routerLink: '/stock-management'
           },
           {
-            label: 'Flyt fra lager til lager',
-            icon: 'pi pi-times'
-          },
-          {
             label: 'Lagerrapport',
-            icon: 'pi pi-times'
-          },
-          {
-            label: 'Lagerværdi',
             icon: 'pi pi-times'
           }
 

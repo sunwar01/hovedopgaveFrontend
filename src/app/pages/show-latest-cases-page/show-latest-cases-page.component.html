@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+<div class="latest-cases-container">
+  <p-toast />
+  <p-card header="Seneste Sager"
+          [style]="
+          {'max-width': '80rem',
+           'border-radius': '2vh',
+           'min-width': '80rem',
+
+
+           }">
+
+    <p-table
+      [value]="latestCases"
+      [globalFilterFields]="['name', 'supplierProductId', 'category.name', 'manufacturer.name', 'supplier.name']"
+      [scrollable]="true"
+      scrollHeight="53vh"
+      stripedRows
+      [rows]="25">
+
+
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Sagsnr.</th>
+          <th>Oprettet</th>
+          <th>Type</th>
+          <th>Emne</th>
+          <th>Kunde</th>
+          <th>Butik</th>
+          <th>Status</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-theCase>
+        <tr (click)="caseClicked(theCase)" style="cursor: pointer;">
+          <td>{{ theCase.id }}</td>
+          <td>{{ theCase.createdAt | date: 'dd-MM-yyyy HH:mm' }}</td>
+          <td>{{ getTypeText(theCase.type) }}</td>
+          <td>{{ theCase.caseContent && theCase.caseContent.length > 0 ? theCase.caseContent[0].content : 'No content available' }}</td>
+          <td>{{ theCase.customer.name }}</td>
+          <td>{{ theCase.store.name }}</td>
+          <td>{{ getStatusText(theCase.status) }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+
+  </p-card>
+
+
+</div>
+
+
+</html>

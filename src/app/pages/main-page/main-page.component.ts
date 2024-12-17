@@ -37,12 +37,12 @@ export class MainPageComponent implements OnInit
     { title: 'Kasse (salg)', icon: 'pi pi-shopping-cart', link: '/counter' },
     { title: 'Opret ny sag', icon: 'pi pi-plus', link: '/create-case' },
     { title: 'Søg efter sag', icon: 'pi pi-search', link: '/find-case' },
-    { title: 'Deadline oversigt', icon: 'pi pi-calendar' },
-    { title: 'Vis seneste sager', icon: 'pi pi-clock' },
+    { title: 'Vis seneste sager', icon: 'pi pi-clock', link: '/latest-cases' },
     { title: 'Vis uafsluttede sager', icon: 'pi pi-exclamation-circle' },
     { title: 'Varer', icon: 'pi pi-box', link: '/products' },
     { title: 'Administrer lagerbeholdning', icon: 'pi pi-cog', link: '/stock-management' },
     { title: 'Find kvittering', icon: 'pi pi-file', action: () => this.Logout() },
+    { title: 'Vis seneste kvitteringer', icon: 'pi pi-file' },
   ];
 
 

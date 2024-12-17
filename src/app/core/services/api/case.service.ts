@@ -36,6 +36,11 @@ export class CaseService
     return this.http.get(this.baseUrl + 'GetCases');
   }
 
+  getLatestCasesByStoreId(storeId: number): Observable<any>
+  {
+    return this.http.get(this.baseUrl + 'GetLatestCasesByStoreId/' + storeId);
+  }
+
 
 
 }
