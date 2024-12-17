@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {CustomerPostDto} from '../../models/customerRelated/dto/customerPost.dto';
+import {CustomerUpdateDto} from '../../models/customerRelated/dto/customerUpdate.dto';
 
 
 @Injectable
@@ -29,6 +30,12 @@ export class CustomerService
   getCustomers(): Observable<any>
   {
     return this.http.get(this.baseUrl + 'GetCustomers');
+  }
+
+
+
+  updateCustomer(customer: any, customerUpdateDto: CustomerUpdateDto): Observable<any> {
+    return this.http.put(`${this.baseUrl}UpdateCustomer/${customer.id}`, customerUpdateDto);
   }
 
 

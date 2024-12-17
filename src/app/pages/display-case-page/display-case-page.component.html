@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+<div class="display-case-container">
+  <p-toast />
+  <p-card header="Sagnr. {{ currentCase?.id }}"
+          [style]="
+          {'max-width': '60rem',
+           'border-radius': '2vh',
+           'min-width': '60rem',
+            'min-height': '50rem',
+            'max-height': '50rem',
+            'overflow': 'auto'
+           }">
+
+    <p-tabs value="0">
+      <p-tablist>
+        <p-tab value="0">Oversigt</p-tab>
+        <p-tab value="1">Historik</p-tab>
+        <p-tab value="2">Varer</p-tab>
+      </p-tablist>
+      <p-tabpanels>
+        <p-tabpanel value="0">
+
+          <div class="card-content">
+            <div class="left-panel">
+
+
+          <p-card  subheader="Kundeoplysninger" [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
+
+            <p-button
+              [style]=" {'margin-bottom': '2vh'}"
+              icon="pi pi-pencil"
+              severity="success"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="editCustomerClicked()"
+            />
+
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="customerName" [(ngModel)]="customerName" readonly disabled/>
+                <label for="customerName">Navn</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="customerMail" [(ngModel)]="customerMail" readonly disabled/>
+                <label for="customerMail">Mail</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="customerPhone" [(ngModel)]="customerPhone" readonly disabled/>
+                <label for="customerPhone">Telefon nr.</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+
+          </p-card>
+
+          <p-card  subheader="Sagsoplysninger"  [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="repairModel" [(ngModel)]="repairModel" readonly disabled/>
+                <label for="repairModel">Model</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="repairDesc" [(ngModel)]="repairDesc"  readonly disabled/>
+                <label for="repairDesc">Beskrivelse</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="repairPrice" [(ngModel)]="repairPrice" readonly disabled/>
+                <label for="repairPrice">Aftalt pris / tilbud</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="repairVMI" [(ngModel)]="repairVMI" readonly disabled/>
+                <label for="repairVMI">VMI - Har enheden nogle fysiske skader ved indlevering?</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="repairEstimate" [(ngModel)]="repairEstimate" readonly disabled/>
+                <label for="repairEstimate">Oplyst estimat på sagen (Tid)</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+          </p-card>
+
+          <p-card  subheader="Detaljer"  [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="detailsPassword" [(ngModel)]="detailsPassword" readonly disabled/>
+                <label for="detailsPassword">Låsekode</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="detailsPin" [(ngModel)]="detailsPin" readonly disabled/>
+                <label for="detailsPin">Pinkode</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="detailsMailLogin" [(ngModel)]="detailsMailLogin" readonly disabled/>
+                <label for="detailsMailLogin">E-mail Apple ID / Google konto</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="detailsPasswordLogin" [(ngModel)]="detailsPasswordLogin" readonly disabled/>
+                <label for="detailsPasswordLogin">Kode Apple ID / Google kode</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+            <p-inputgroup>
+              <p-floatlabel variant="in">
+                <input pInputText id="detailsIMEI" [(ngModel)]="detailsIMEI" readonly disabled/>
+                <label for="detailsIMEI">IMEI / serie-nummer</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+            <p-inputgroup>
+              <p-floatlabel variant="in" aria-readonly="true">
+                <input pInputText id="detailsAlreadyPaid" [(ngModel)]="detailsAlreadyPaid" readonly disabled/>
+                <label for="detailsAlreadyPaid">Allerede betalt? - Indtast BONID</label>
+              </p-floatlabel>
+            </p-inputgroup>
+
+
+
+
+
+
+          </p-card>
+
+          </div>
+
+
+            <p-divider type="solid" layout="vertical" />
+
+
+
+            <div class="right-panel">
+
+              <p-card subheader="Generel"  [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
+
+                <p-inputgroup *ngIf="currentCase">
+                  <p-floatlabel variant="in" aria-readonly="true">
+                    <input pInputText id="generelStatus" [value]="getEnumName(currentCase.status)" readonly disabled/>
+                    <label for="generelStatus">Status</label>
+                  </p-floatlabel>
+                </p-inputgroup>
+
+                <p-inputgroup>
+                  <p-floatlabel variant="in" aria-readonly="true">
+                    <input pInputText id="generelEndeligePris" [(ngModel)]="totalCasePrice" readonly disabled/>
+                    <label for="generelEndeligePris">Endelige Pris</label>
+                  </p-floatlabel>
+                </p-inputgroup>
+
+                <p-button label="Gå til kasse" icon="pi pi-money-bill" (click)="goToCounterPage()" [style]=" {'margin-top': '2vh'}"></p-button>
+
+              </p-card>
+
+              <p-card subheader="Registrerede Betalinger"  [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
+
+
+
+              </p-card>
+
+
+            </div>
+
+
+
+          </div>
+
+        </p-tabpanel>
+        <p-tabpanel value="1">
+
+          <p-card header="Tilføj Note" [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
+
+            <textarea [(ngModel)]="caseNoteTextArea" variant="filled" rows="10" cols="100" style="resize: none" pTextarea></textarea>
+
+            <p-button label="Nulstil" (click)="clearNoteTextArea()" severity="secondary" [style]=" {'margin-top': '2vh'}"></p-button>
+            <p-button label="Tilføj" (click)="addCaseNoteClicked()" [style]=" {'margin-top': '2vh'}"></p-button>
+
+
+          </p-card>
+
+          <p-card header="Historik" [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
+            <div *ngFor="let caseNote of caseNotes">
+              <p-card
+                [header]="'Besked af ' + caseNote.user.name + ' (' + caseNote.user.username + ')'"
+                [style]="{'border': '1px solid', 'margin-top': '2vh'}"
+              >
+
+                <p>{{ 'Dato tilføjet ' + (caseNote.dateAdded | date: 'dd-MM-yyyy HH:mm') }}</p>
+
+                <textarea
+                  rows="5"
+                  cols="30"
+                  [(ngModel)]="caseNote.text"
+                  readonly
+                  style="width: 100%; resize: none;">
+                </textarea>
+
+              </p-card>
+            </div>
+
+
+          </p-card>
+
+
+
+        </p-tabpanel>
+        <p-tabpanel value="2">
+
+          <p-card header="Tilføj vare til sag">
+
+            <p-listbox
+
+              [options]="availableStockProducts"
+              [(ngModel)]="selectedStockProduct"
+              optionLabel="product.name"
+              [filter]="true"
+              (onChange)="addToCaseProducts()"
+            />
+
+            <p-table
+              [scrollable]="true"
+              scrollHeight="53vh"
+              [value]="currentCase?.caseProducts || []"
+              stripedRows
+              [rows]="10">
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Varenavn</th>
+                  <th>Antal</th>
+                  <th>Pris</th>
+                  <th>Betalt</th>
+                  <th>Muligheder</th>
+                </tr>
+              </ng-template>
+
+
+              <ng-template pTemplate="body" let-caseProduct>
+                <tr [pSelectableRow]="caseProduct">
+                  <td>{{ caseProduct.product.name }}</td>
+                  <td>{{ caseProduct.quantity }}</td>
+                  <td>{{ caseProduct.product.price }}</td>
+                  <td>{{ caseProduct.isPaid }}</td>
+                  <td>
+                    <p-button
+                      icon="pi pi-times"
+                      severity="danger"
+                      (click)="removeCaseProduct(caseProduct.id)">
+                    </p-button>
+                    <p-button
+                      icon="pi pi-pencil"
+                      severity="success">
+
+                    </p-button>
+                  </td>
+                </tr>
+              </ng-template>
+
+
+
+            </p-table>
+
+
+          </p-card>
+
+        </p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
+
+
+    <p-dialog
+      *ngIf="currentCustomer"
+      [(visible)]="editCustomerDialog"
+      [style]="{ width: '450px' }"
+      header="Rediger Kunde"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content" >
+
+
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCustomerName" [(ngModel)]="currentCustomer.name"/>
+            <label for="editCustomerName">Navn</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCustomerMail" [(ngModel)]="currentCustomer.contactInfo.mail"/>
+            <label for="editCustomerMail">Mail</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCustomerPhone" [(ngModel)]="currentCustomer.contactInfo.phoneNumber"/>
+            <label for="editCustomerPhone">Telefon nr.</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+      </ng-template>
+
+
+      <ng-template pTemplate="footer">
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideEditCustomerDialog()" severity="secondary" />
+        <p-button pRipple label="Gem" icon="pi pi-check" (click)="saveCustomer()" severity="success" />
+      </ng-template>
+    </p-dialog>
+
+
+  </p-card>
+
+
+</div>
+
+
+</html>

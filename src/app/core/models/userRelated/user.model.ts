@@ -6,8 +6,7 @@ export interface UserModel
 {
   id: number;
   username: string;
-  firstname: string;
-  lastname: string;
+  name: string;
   isDeleted: boolean;
 
   userContactInfo: UserContactInfoModel;

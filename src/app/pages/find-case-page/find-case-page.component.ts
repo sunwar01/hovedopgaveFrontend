@@ -67,10 +67,10 @@ export class FindCasePageComponent implements OnInit
   {
   }
 
-  caseSelected(selectedCase: CaseModel)
+  caseClicked(selectedCase: CaseModel)
   {
 
-    console.log(selectedCase);
+    this.router.navigate(['/display-case', selectedCase.id]);
 
   }
 

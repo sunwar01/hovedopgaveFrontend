@@ -28,6 +28,7 @@ import {CurrentUserService} from '../../core/services/currentUserService/current
 import {CurrentStoreService} from '../../core/services/currentStoreService/currentStore.service';
 import {CaseContentService} from '../../core/services/api/caseContent.service';
 import {Router} from '@angular/router';
+import {DividerModule} from 'primeng/divider';
 
 @Component({
   selector: 'app-create-case-page',
@@ -49,7 +50,8 @@ import {Router} from '@angular/router';
     ToastModule,
     FloatLabelModule,
     ListboxModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    DividerModule
   ],
   templateUrl: './create-case-page.component.html',
   styleUrl: './create-case-page.component.css'
@@ -183,6 +185,9 @@ export class CreateCasePageComponent implements OnInit {
                 error: (err) => console.error(`Error creating case content for fieldId ${content.fieldId}:`, err)
               });
           });
+
+          this.router.navigate(['/display-case', caseId]);
+
         },
         error: (err) => console.error("Error creating case:", err)
       });
@@ -212,8 +217,6 @@ export class CreateCasePageComponent implements OnInit {
     }
 
 
-
-    this.router.navigate(['/main']);
 
   }
 

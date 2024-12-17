@@ -1,13 +1,11 @@
 import {ProductModel} from '../productRelated/product.model';
 
 
-export interface StockProductsModel {
+export interface CaseProductsModel {
   id: number;
-  stockId: number;
+  caseId: number;
   productId: number;
   quantity: number;
-  isDeleted: boolean;
+  isPaid: boolean;
   product: ProductModel;
-
-
 }

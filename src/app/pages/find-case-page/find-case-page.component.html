@@ -50,7 +50,7 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-theCase>
-        <tr *ngIf="productTable.filteredValue?.length" (click)="caseSelected(theCase)" style="cursor: pointer;">
+        <tr *ngIf="productTable.filteredValue?.length" (click)="caseClicked(theCase)" style="cursor: pointer;">
           <td>{{ theCase.id }}</td>
           <td>{{ theCase.createdAt | date: 'dd-MM-yyyy HH:mm' }}</td>
           <td>{{ theCase.caseContent && theCase.caseContent.length > 0 ? theCase.caseContent[0].content : 'No content available' }}</td>

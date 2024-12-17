@@ -38,5 +38,10 @@ export class CaseContentService
   }
 
 
+  updateCaseContent(caseContent: any): Observable<any>
+  {
+    return this.http.put(this.baseUrl + 'UpdateCaseContent', caseContent);
+  }
+
 
 }

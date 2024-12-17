@@ -70,7 +70,7 @@ export class CounterPageComponent implements OnInit{
   selectedStockProduct: StockProductsModel | null = null;
 
 
-  selectedStockProducts: { product: any; quantity: number; type: string }[] = [];
+  selectedStockProducts: {stockProductId: number; product: any; quantity: number; type: string }[] = [];
 
   payments: { paymentType: PaymentType; amount: number }[] = [];
 
@@ -173,7 +173,12 @@ export class CounterPageComponent implements OnInit{
       if (existingProduct) {
         existingProduct.quantity++;
       } else {
+
+
+
+
         this.selectedStockProducts.push({
+          stockProductId: this.selectedStockProduct?.id || 0,
           product: selected.product,
           quantity: 1,
           type: this.selectedSaleType === StockChangeType.StockRemoved ? 'Salg' : 'Retur',
@@ -190,6 +195,34 @@ export class CounterPageComponent implements OnInit{
     }, 0);
   }
 
+  updateStock() {
+
+    this.selectedStockProducts.forEach((p) => {
+      const stockProductsUpdateDto = {
+        id: p.stockProductId,
+        quantity: p.type === 'Salg' ? p.quantity : -p.quantity,
+        userId: this.currentUserService.getCurrentUserId(),
+        ChangeType: StockChangeType.StockRemoved,
+      };
+
+
+
+      this.stockProductsService.UpdateStockProduct(stockProductsUpdateDto).subscribe({
+        error: (error: any) => {
+          this.toastService.showError(error);
+          console.log(error);
+        },
+        complete: () => {
+          this.updateStockProductList();
+        }
+      });
+
+
+
+  });
+  }
+
+
   createCounterSales(receiptId : number | null) {
 
     this.payments.forEach((p) => {
@@ -201,7 +234,7 @@ export class CounterPageComponent implements OnInit{
         counterId: 3,
       };
 
-      console.log(counterSales);
+
 
       this.counterSalesService.CreateCounterSales(counterSales).subscribe({
         next: (data: any) => {
@@ -278,6 +311,7 @@ export class CounterPageComponent implements OnInit{
       complete: () => {
         this.createReceiptLines(receiptId);
         this.createCounterSales(receiptId);
+        this.updateStock();
         this.clearCounter();
 
         this.toastService.showSuccess("Salg gennemført");
@@ -295,7 +329,7 @@ export class CounterPageComponent implements OnInit{
   }
 
 
-  removeFromSelectedStockProducts(product: { product: any; quantity: number; type: string }) {
+  removeFromSelectedStockProducts(product: { stockProductId: number; product: any; quantity: number; type: string }) {
     const index = this.selectedStockProducts.indexOf(product);
     if (index >= 0) {
       this.selectedStockProducts.splice(index, 1);

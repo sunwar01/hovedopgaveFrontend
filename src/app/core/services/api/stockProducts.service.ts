@@ -25,6 +25,7 @@ export class StockProductsService
 
   GetStockProductsByStockId(stockId: number): Observable<any>
   {
+    console.log("Fetching stock products for stock ID:", stockId);
     return this.http.get(`${this.baseUrl}GetStockProductsByStockId/${stockId}`);
   }
 

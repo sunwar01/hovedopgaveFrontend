@@ -8,5 +8,6 @@ export interface CaseGetDto {
   storeId: number;
   customerId: number;
   Type: CaseType;
+  dateCreated: Date;
 
 }
