@@ -39,6 +39,7 @@ import {CaseProductService} from '../../core/services/api/caseProduct.service';
 import {CurrentStoreService} from '../../core/services/currentStoreService/currentStore.service';
 import {DividerModule} from 'primeng/divider';
 import {CaseStatus} from '../../core/enums/caseStatus.enum';
+import {CaseUpdateDto} from '../../core/models/caseRelated/dto/caseUpdate.dto';
 
 @Component({
   selector: 'app-display-case-page',
@@ -79,12 +80,16 @@ import {CaseStatus} from '../../core/enums/caseStatus.enum';
 })
 export class DisplayCasePageComponent implements OnInit {
 
+
+
   currentCase: CaseModel | undefined = undefined;
   currentCustomer: CustomerModel | undefined = undefined;
   caseNotes: CaseNotesModel[] = [];
   availableStockProducts: StockProductsModel[] = [];
   selectedStockProduct: StockProductsModel | null = null;
   totalCasePrice: number = 0;
+  caseStatuses: { label: string, value: CaseStatus }[] = [];
+  currentCaseStatus: CaseStatus | undefined = undefined;
 
   editCustomerDialog: boolean = false;
 
@@ -125,6 +130,17 @@ export class DisplayCasePageComponent implements OnInit {
     });
   }
 
+  populateCaseStatuses() {
+    this.caseStatuses = Object.keys(CaseStatus)
+      .filter(key => isNaN(Number(key)))
+      .map((key) => ({
+        label: this.getEnumName(CaseStatus[key as keyof typeof CaseStatus]),
+        value: CaseStatus[key as keyof typeof CaseStatus]
+
+      }));
+
+  }
+
   saveCustomer(): void {
     if (this.currentCustomer) {
 
@@ -152,6 +168,37 @@ export class DisplayCasePageComponent implements OnInit {
     }
   }
 
+
+
+  saveCaseStatus(): void {
+
+    if (this.currentCase && this.currentCaseStatus !== undefined) {
+
+
+      const caseUpdateDto: CaseUpdateDto = {
+        status: this.currentCaseStatus
+      };
+
+
+        this.currentCase.status = this.currentCaseStatus;
+
+        this.caseService.updateCase(this.currentCase, caseUpdateDto).subscribe({
+          next: (data: any) => {
+
+          },
+          error: (error: any) => {
+            console.log(error);
+            this.toastService.showError(error);
+          },
+          complete: () => {
+            this.updateCase();
+
+          }
+        });
+      }
+
+  }
+
   getEnumName(value: number): string {
     return CaseStatus[value];
   }
@@ -165,6 +212,11 @@ export class DisplayCasePageComponent implements OnInit {
         queryParams: { caseId: this.currentCase.id, caseProductIds: caseProductIds.join(',') }
       });
     }
+  }
+
+  onStatusChange(event : any): void {
+
+    this.saveCaseStatus();
   }
 
   removeCaseProduct(caseProductId: number): void {
@@ -280,6 +332,7 @@ export class DisplayCasePageComponent implements OnInit {
 
 
             this.currentCustomer = this.currentCase?.customer;
+            this.currentCaseStatus = this.currentCase?.status;
 
             this.customerName = this.currentCustomer?.name;
             this.customerMail =  this.currentCustomer?.contactInfo.mail;
@@ -353,6 +406,9 @@ export class DisplayCasePageComponent implements OnInit {
 
     this.updateCase();
     this.updateStockProductList();
+    this.populateCaseStatuses();
+
+
 
 
   }

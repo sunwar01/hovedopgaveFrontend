@@ -14,6 +14,17 @@
             'overflow': 'auto'
            }">
 
+
+    <div style="display: flex; justify-content: center; align-items: center; text-align: center;">
+    <p-floatlabel  variant="in">
+      <p-select [(ngModel)]="currentCaseStatus" id="in_label" [options]="caseStatuses" optionLabel="label" optionValue="value" variant="filled" (ngModelChange)="onStatusChange($event)"/>
+      <label for="in_label">Status</label>
+    </p-floatlabel>
+    </div>
+
+
+
+
     <p-tabs value="0">
       <p-tablist>
         <p-tab value="0">Oversigt</p-tab>

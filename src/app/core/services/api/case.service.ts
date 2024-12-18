@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {CustomerPostDto} from '../../models/customerRelated/dto/customerPost.dto';
+import {CustomerUpdateDto} from '../../models/customerRelated/dto/customerUpdate.dto';
+import {CaseUpdateDto} from '../../models/caseRelated/dto/caseUpdate.dto';
 
 
 @Injectable
@@ -39,6 +41,10 @@ export class CaseService
   getLatestCasesByStoreId(storeId: number): Observable<any>
   {
     return this.http.get(this.baseUrl + 'GetLatestCasesByStoreId/' + storeId);
+  }
+
+  updateCase(theCase: any, caseUpdateDto: CaseUpdateDto): Observable<any> {
+    return this.http.put(`${this.baseUrl}UpdateCase/${theCase.id}`, caseUpdateDto);
   }
 
 
