@@ -12,6 +12,7 @@ import {CreateCasePageComponent} from './pages/create-case-page/create-case-page
 import {FindCasePageComponent} from './pages/find-case-page/find-case-page.component';
 import {DisplayCasePageComponent} from './pages/display-case-page/display-case-page.component';
 import {ShowLatestCasesPageComponent} from './pages/show-latest-cases-page/show-latest-cases-page.component';
+import {UnsolvedCasesPageComponent} from './pages/unsolved-cases-page/unsolved-cases-page.component';
 
 export const routes: Routes = [
 
@@ -55,6 +56,7 @@ export const routes: Routes = [
   { path: 'find-case', component: FindCasePageComponent},
   { path: 'display-case/:caseId', component: DisplayCasePageComponent},
   { path: 'latest-cases', component: ShowLatestCasesPageComponent},
+  { path: 'unsolved-cases', component: UnsolvedCasesPageComponent},
 
 
 

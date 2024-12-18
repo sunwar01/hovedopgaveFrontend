@@ -163,7 +163,7 @@ export class CreateCasePageComponent implements OnInit {
     const createCaseAndContents = (customerId: number) => {
 
       this.caseService.createCase({
-        caseStatus: CaseStatus.Afventer, // hardcoded for now
+        caseStatus: CaseStatus.Afventerhåndtering, // hardcoded for now
         creator: this.currentUserService.getCurrentUserId(),
         storeId: this.currentStoreService.currentStore?.id,
         customerId: customerId,

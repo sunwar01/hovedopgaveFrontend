@@ -121,7 +121,9 @@ export class MenuBarComponent implements OnInit {
           },
           {
             label: 'Vis uafsluttede sager',
-            icon: 'pi pi-times'
+            icon: 'pi pi-times',
+            routerLink: '/unsolved-cases'
+
           }
 
         ]

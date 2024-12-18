@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+<div class="unsolved-cases-container">
+  <p-toast />
+  <p-card header="Uafsluttede sager"
+          [style]="
+          {'max-width': '60rem',
+           'border-radius': '2vh',
+           'min-width': '60rem',
+            'min-height': '50rem',
+            'max-height': '50rem',
+            'overflow': 'auto'
+           }">
+
+    <p-tabs value="0">
+      <p-tablist>
+        <p-tab value="0">Afventer håndtering</p-tab>
+        <p-tab value="1">Igangværende </p-tab>
+        <p-tab value="2">Indsendt eksternt</p-tab>
+        <p-tab value="3">Afventer Rerservedel</p-tab>
+        <p-tab value="4">Afventer kunde</p-tab>
+      </p-tablist>
+      <p-tabpanels>
+        <p-tabpanel value="0">
+
+          <p-table
+            [value]="getCasesByStatus(0)"
+            [scrollable]="true"
+            scrollHeight="53vh"
+            stripedRows
+            [rows]="25">
+
+
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Sagsnr.</th>
+                <th>Oprettet</th>
+                <th>Type</th>
+                <th>Emne</th>
+                <th>Kunde</th>
+                <th>Butik</th>
+                <th>Status</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-theCase>
+              <tr (click)="caseClicked(theCase)" style="cursor: pointer;">
+                <td>{{ theCase.id }}</td>
+                <td>{{ theCase.createdAt | date: 'dd-MM-yyyy HH:mm' }}</td>
+                <td>{{ getTypeText(theCase.type) }}</td>
+                <td>{{ theCase.caseContent && theCase.caseContent.length > 0 ? theCase.caseContent[0].content : 'No content available' }}</td>
+                <td>{{ theCase.customer.name }}</td>
+                <td>{{ theCase.store.name }}</td>
+                <td>{{ getStatusText(theCase.status) }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+
+
+
+        </p-tabpanel>
+        <p-tabpanel value="1">
+
+          <p-table
+            [value]="getCasesByStatus(1)"
+            [scrollable]="true"
+            scrollHeight="53vh"
+            stripedRows
+            [rows]="25">
+
+
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Sagsnr.</th>
+                <th>Oprettet</th>
+                <th>Type</th>
+                <th>Emne</th>
+                <th>Kunde</th>
+                <th>Butik</th>
+                <th>Status</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-theCase>
+              <tr (click)="caseClicked(theCase)" style="cursor: pointer;">
+                <td>{{ theCase.id }}</td>
+                <td>{{ theCase.createdAt | date: 'dd-MM-yyyy HH:mm' }}</td>
+                <td>{{ getTypeText(theCase.type) }}</td>
+                <td>{{ theCase.caseContent && theCase.caseContent.length > 0 ? theCase.caseContent[0].content : 'No content available' }}</td>
+                <td>{{ theCase.customer.name }}</td>
+                <td>{{ theCase.store.name }}</td>
+                <td>{{ getStatusText(theCase.status) }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+
+        </p-tabpanel>
+        <p-tabpanel value="2">
+
+
+          <p-table
+            [value]="getCasesByStatus(2)"
+            [scrollable]="true"
+            scrollHeight="53vh"
+            stripedRows
+            [rows]="25">
+
+
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Sagsnr.</th>
+                <th>Oprettet</th>
+                <th>Type</th>
+                <th>Emne</th>
+                <th>Kunde</th>
+                <th>Butik</th>
+                <th>Status</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-theCase>
+              <tr (click)="caseClicked(theCase)" style="cursor: pointer;">
+                <td>{{ theCase.id }}</td>
+                <td>{{ theCase.createdAt | date: 'dd-MM-yyyy HH:mm' }}</td>
+                <td>{{ getTypeText(theCase.type) }}</td>
+                <td>{{ theCase.caseContent && theCase.caseContent.length > 0 ? theCase.caseContent[0].content : 'No content available' }}</td>
+                <td>{{ theCase.customer.name }}</td>
+                <td>{{ theCase.store.name }}</td>
+                <td>{{ getStatusText(theCase.status) }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+        </p-tabpanel>
+
+        <p-tabpanel value="3">
+
+
+          <p-table
+            [value]="getCasesByStatus(3)"
+            [scrollable]="true"
+            scrollHeight="53vh"
+            stripedRows
+            [rows]="25">
+
+
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Sagsnr.</th>
+                <th>Oprettet</th>
+                <th>Type</th>
+                <th>Emne</th>
+                <th>Kunde</th>
+                <th>Butik</th>
+                <th>Status</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-theCase>
+              <tr (click)="caseClicked(theCase)" style="cursor: pointer;">
+                <td>{{ theCase.id }}</td>
+                <td>{{ theCase.createdAt | date: 'dd-MM-yyyy HH:mm' }}</td>
+                <td>{{ getTypeText(theCase.type) }}</td>
+                <td>{{ theCase.caseContent && theCase.caseContent.length > 0 ? theCase.caseContent[0].content : 'No content available' }}</td>
+                <td>{{ theCase.customer.name }}</td>
+                <td>{{ theCase.store.name }}</td>
+                <td>{{ getStatusText(theCase.status) }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+        </p-tabpanel>
+
+        <p-tabpanel value="4">
+
+
+          <p-table
+            [value]="getCasesByStatus(4)"
+            [scrollable]="true"
+            scrollHeight="53vh"
+            stripedRows
+            [rows]="25">
+
+
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Sagsnr.</th>
+                <th>Oprettet</th>
+                <th>Type</th>
+                <th>Emne</th>
+                <th>Kunde</th>
+                <th>Butik</th>
+                <th>Status</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-theCase>
+              <tr (click)="caseClicked(theCase)" style="cursor: pointer;">
+                <td>{{ theCase.id }}</td>
+                <td>{{ theCase.createdAt | date: 'dd-MM-yyyy HH:mm' }}</td>
+                <td>{{ getTypeText(theCase.type) }}</td>
+                <td>{{ theCase.caseContent && theCase.caseContent.length > 0 ? theCase.caseContent[0].content : 'No content available' }}</td>
+                <td>{{ theCase.customer.name }}</td>
+                <td>{{ theCase.store.name }}</td>
+                <td>{{ getStatusText(theCase.status) }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+        </p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
+
+
+  </p-card>
+
+
+</div>
+
+
+</html>

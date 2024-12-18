@@ -38,7 +38,7 @@ export class MainPageComponent implements OnInit
     { title: 'Opret ny sag', icon: 'pi pi-plus', link: '/create-case' },
     { title: 'Søg efter sag', icon: 'pi pi-search', link: '/find-case' },
     { title: 'Vis seneste sager', icon: 'pi pi-clock', link: '/latest-cases' },
-    { title: 'Vis uafsluttede sager', icon: 'pi pi-exclamation-circle' },
+    { title: 'Vis uafsluttede sager', icon: 'pi pi-exclamation-circle', link: '/unsolved-cases' },
     { title: 'Varer', icon: 'pi pi-box', link: '/products' },
     { title: 'Administrer lagerbeholdning', icon: 'pi pi-cog', link: '/stock-management' },
     { title: 'Find kvittering', icon: 'pi pi-file', action: () => this.Logout() },

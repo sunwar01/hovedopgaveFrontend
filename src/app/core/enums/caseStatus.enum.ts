@@ -1,7 +1,9 @@
 export enum CaseStatus
 {
-  Afventer,
-  Behandling,
-  Afsluttet,
-  Annulleret
+  Afventerhåndtering,
+  Igangværende,
+  InsendtEksternt,
+  AfventerReservedel,
+  AfventerKunde,
+  KlarTilAfhentning
 }
