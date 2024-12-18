@@ -42,7 +42,7 @@ export class MainPageComponent implements OnInit
     { title: 'Varer', icon: 'pi pi-box', link: '/products' },
     { title: 'Administrer lagerbeholdning', icon: 'pi pi-cog', link: '/stock-management' },
     { title: 'Find kvittering', icon: 'pi pi-file', action: () => this.Logout() },
-    { title: 'Vis seneste kvitteringer', icon: 'pi pi-file' },
+    { title: 'Vis seneste kvitteringer', icon: 'pi pi-file', link: '/latest-receipts' },
   ];
 
 

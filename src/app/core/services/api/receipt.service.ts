@@ -27,6 +27,11 @@ export class ReceiptService
     return this.http.get(`${this.baseUrl}GetReceipt/${id}`);
   }
 
+  GetLatestReceipts(storeId: number): Observable<any>
+  {
+    return this.http.get(`${this.baseUrl}GetLatestReceipts/${storeId}`);
+  }
+
   CreateReceipt(receipt: any): Observable<any> {
     return this.http.post(`${this.baseUrl}CreateReceipt`, receipt);
   }

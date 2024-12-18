@@ -13,6 +13,7 @@ import {FindCasePageComponent} from './pages/find-case-page/find-case-page.compo
 import {DisplayCasePageComponent} from './pages/display-case-page/display-case-page.component';
 import {ShowLatestCasesPageComponent} from './pages/show-latest-cases-page/show-latest-cases-page.component';
 import {UnsolvedCasesPageComponent} from './pages/unsolved-cases-page/unsolved-cases-page.component';
+import {ShowLatestReceiptsPageComponent} from './pages/show-latest-receipts-page/show-latest-receipts-page.component';
 
 export const routes: Routes = [
 
@@ -58,6 +59,12 @@ export const routes: Routes = [
   { path: 'latest-cases', component: ShowLatestCasesPageComponent},
   { path: 'unsolved-cases', component: UnsolvedCasesPageComponent},
 
+
+  /*******************************************
+   *           Receipt Related               *
+   * *****************************************/
+
+  { path: 'latest-receipts', component: ShowLatestReceiptsPageComponent},
 
 
 

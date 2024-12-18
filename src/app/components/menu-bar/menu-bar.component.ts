@@ -92,7 +92,9 @@ export class MenuBarComponent implements OnInit {
           },
           {
             label: 'Vis seneste kvitteringer',
-            icon: 'pi pi-upload'
+            icon: 'pi pi-upload',
+            routerLink: '/latest-receipts'
+
           }
         ]
       }
