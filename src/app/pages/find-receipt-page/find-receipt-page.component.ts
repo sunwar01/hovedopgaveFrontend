@@ -36,6 +36,7 @@ export class FindReceiptPageComponent implements OnInit {
   constructor(private receiptService : ReceiptService, private router: Router) { }
 
   receiptClicked(receipt: ReceiptModel) {
+    this.router.navigate(['/display-receipt', receipt.id]);
 
   }
 

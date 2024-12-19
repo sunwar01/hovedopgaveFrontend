@@ -292,7 +292,7 @@ export class CounterPageComponent implements OnInit{
     const receipt: ReceiptPostDto = {
       total : this.calculateTotalPrice(),
       storeId : this.currentStoreService.currentStore?.id,
-      counterId : 3, // counter id er hardcoded, da at have flere kasser er ude for scope, men kan nemt implementeres hvis det ønskes
+      counterId : 1, // counter id er hardcoded, da at have flere kasser er ude for scope, men kan nemt implementeres hvis det ønskes
       userId : this.currentUserService.getCurrentUserId(),
       caseId : null, // case id er null, da vi her laver et salg direkte i kassen
     };

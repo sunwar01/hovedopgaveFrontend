@@ -1,5 +1,6 @@
 import {UserModel} from '../userRelated/user.model';
 import {CounterGetDto} from '../counterRelated/dto/counterGet.dto';
+import {ReceiptLinesModel} from '../receiptLinesRelated/receiptLines.model';
 
 export interface ReceiptModel {
   id: number;
@@ -11,6 +12,7 @@ export interface ReceiptModel {
 
   user: UserModel;
   counter: CounterGetDto
+  receiptLines : ReceiptLinesModel[];
 
 
 }

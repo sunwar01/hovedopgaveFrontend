@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+<div class="display-receipt-container">
+  <p-toast />
+  <p-card header="Bon id: {{ currentReceipt?.id }}"
+          [style]="
+          {'max-width': '60rem',
+           'border-radius': '2vh',
+           'min-width': '60rem',
+            'min-height': '50rem',
+            'max-height': '50rem',
+            'overflow': 'auto'
+           }">
+
+
+    <p-card subheader="Info"  [style]="{'margin-top': '1rem', 'border': '1px solid', }">
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="receiptTotal" [value]="receiptTotal" readonly disabled/>
+          <label for="receiptTotal">Beløb i alt</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="receiptCreatedAt"  [value]="receiptCreatedAt | date:'dd-MM-yyyy HH:mm:ss'"   readonly disabled/>
+          <label for="receiptCreatedAt">Tidspunkt</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="receiptUser" [value]="receiptUser" readonly disabled/>
+          <label for="receiptUser">Medarbejder</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="receiptStore" [value]="receiptStore" readonly disabled/>
+          <label for="receiptStore">Butik</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="receiptCounter" [value]="receiptCounter" readonly disabled/>
+          <label for="receiptCounter">Kasse</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+      <p-inputgroup>
+        <p-floatlabel variant="in">
+          <input pInputText id="receiptCaseId" [value]="receiptCaseId ? receiptCaseId : 'Ingen sag tilknyttet'" readonly disabled/>
+          <label for="receiptCaseId">Sagsnr</label>
+        </p-floatlabel>
+      </p-inputgroup>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </p-card>
+
+    <p-card subheader="Varer" [style]="{'margin-top': '1rem', 'border': '1px solid', }">
+
+      <p-table
+        [scrollable]="true"
+        scrollHeight="53vh"
+        [value]="currentReceipt?.receiptLines || []"
+        stripedRows
+        [rows]="5">
+
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Varenavn</th>
+            <th>Antal</th>
+            <th>Samlet Pris</th>
+          </tr>
+        </ng-template>
+
+
+        <ng-template pTemplate="body" let-receiptLine>
+          <tr [pSelectableRow]="receiptLine">
+            <td>{{ receiptLine.productText }}</td>
+            <td>{{ receiptLine.quantity }}</td>
+            <td>{{ receiptLine.price }}</td>
+          </tr>
+        </ng-template>
+
+
+
+      </p-table>
+
+
+    </p-card>
+
+
+
+
+
+  </p-card>
+
+
+</div>
+
+
+</html>
