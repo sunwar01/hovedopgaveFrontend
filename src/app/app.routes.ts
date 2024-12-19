@@ -14,6 +14,7 @@ import {DisplayCasePageComponent} from './pages/display-case-page/display-case-p
 import {ShowLatestCasesPageComponent} from './pages/show-latest-cases-page/show-latest-cases-page.component';
 import {UnsolvedCasesPageComponent} from './pages/unsolved-cases-page/unsolved-cases-page.component';
 import {ShowLatestReceiptsPageComponent} from './pages/show-latest-receipts-page/show-latest-receipts-page.component';
+import {FindReceiptPageComponent} from './pages/find-receipt-page/find-receipt-page.component';
 
 export const routes: Routes = [
 
@@ -65,6 +66,7 @@ export const routes: Routes = [
    * *****************************************/
 
   { path: 'latest-receipts', component: ShowLatestReceiptsPageComponent},
+  { path: 'find-receipt', component: FindReceiptPageComponent},
 
 
 

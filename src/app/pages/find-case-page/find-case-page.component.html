@@ -16,9 +16,9 @@
            }">
 
     <p-table
-      #productTable
+      #caseTable
       [value]="availableCases"
-      [globalFilterFields]="['id']"
+      [globalFilterFields]="['id' , 'customer.name']"
       [scrollable]="true"
       scrollHeight="53vh"
       stripedRows>
@@ -33,7 +33,7 @@
             <input
               pInputText
               type="text"
-              (input)="productTable.filterGlobal($any($event.target).value, 'contains')"
+              (input)="caseTable.filterGlobal($any($event.target).value, 'contains')"
               placeholder="Søg"
             />
           </p-iconfield>
@@ -50,7 +50,7 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-theCase>
-        <tr *ngIf="productTable.filteredValue?.length" (click)="caseClicked(theCase)" style="cursor: pointer;">
+        <tr *ngIf="caseTable.filteredValue?.length" (click)="caseClicked(theCase)" style="cursor: pointer;">
           <td>{{ theCase.id }}</td>
           <td>{{ theCase.createdAt | date: 'dd-MM-yyyy HH:mm' }}</td>
           <td>{{ theCase.caseContent && theCase.caseContent.length > 0 ? theCase.caseContent[0].content : 'No content available' }}</td>
@@ -61,7 +61,7 @@
       </ng-template>
     </p-table>
 
-    <div *ngIf="!productTable.filteredValue?.length" class="no-results">
+    <div *ngIf="!caseTable.filteredValue?.length" class="no-results">
       <i class="pi pi-search-minus"></i>
       <p>Ingen sager matcher din søgning.</p>
     </div>

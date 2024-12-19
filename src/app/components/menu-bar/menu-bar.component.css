@@ -20,3 +20,8 @@ p-button:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
+
+.clickable-avatar {
+  user-select: none;
+  cursor: pointer;
+}

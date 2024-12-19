@@ -54,14 +54,13 @@
 
 
   <ng-template pTemplate="end">
-
-
-
     <div class="Profile">
-  <p-overlay-badge value="10" severity="danger">
-    <p-avatar  label="SW" size="xlarge" />
-  </p-overlay-badge>
+      <p-overlay-badge value="10" severity="danger">
+        <p-avatar label="SW" size="xlarge" (click)="menu.toggle($event)" class="clickable-avatar"></p-avatar>
+      </p-overlay-badge>
+      <p-menu [model]="avatarItems" [popup]="true" #menu></p-menu>
     </div>
   </ng-template>
+
 
 </p-toolbar>

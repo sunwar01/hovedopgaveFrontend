@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+<div class="find-receipt-container">
+  <p-toast />
+  <p-card header="Søg efter kvittering"
+          [style]="
+          {'max-width': '80rem',
+           'border-radius': '2vh',
+           'min-width': '80rem',
+            'min-height': '50rem',
+            'max-height': '50rem',
+
+
+           }">
+
+    <p-table
+      #receiptTable
+      [value]="availableReceipts"
+      [globalFilterFields]="['id', 'caseId']"
+      [scrollable]="true"
+      scrollHeight="53vh"
+      stripedRows>
+
+
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <p-iconfield iconPosition="left">
+            <p-inputicon>
+              <i class="pi pi-search"></i>
+            </p-inputicon>
+            <input
+              pInputText
+              type="text"
+              (input)="receiptTable.filterGlobal($any($event.target).value, 'contains')"
+              placeholder="Søg"
+            />
+          </p-iconfield>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Bon id</th>
+          <th>Tidspunkt</th>
+          <th>Medarbejder</th>
+          <th>Butik</th>
+          <th>Sagsnr</th>
+          <th>Beløb</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-receipt>
+        <tr *ngIf="receiptTable.filteredValue?.length" (click)="receiptClicked(receipt)" style="cursor: pointer;">
+          <td>{{ receipt.id }}</td>
+          <td>{{ receipt.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ receipt.user.username }}</td>
+          <td>{{ receipt.counter.store.name }}</td>
+          <td>{{ receipt.caseId ? receipt.caseId : 'Ingen sag tilknyttet' }}</td>
+          <td>{{ receipt.total }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <div *ngIf="!receiptTable.filteredValue?.length" class="no-results">
+      <i class="pi pi-search-minus"></i>
+      <p>Ingen kvitteringer matcher din søgning.</p>
+    </div>
+
+
+
+  </p-card>
+
+
+</div>
+
+
+</html>

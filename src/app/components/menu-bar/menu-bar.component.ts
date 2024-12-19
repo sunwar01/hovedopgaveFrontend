@@ -16,6 +16,8 @@ import {IconFieldModule} from 'primeng/iconfield';
 import {InputIconModule} from 'primeng/inputicon';
 import {ImageModule} from 'primeng/image';
 import {ThemeService} from '../../core/services/themeService/theme.service';
+import {CurrentUserService} from '../../core/services/currentUserService/currentUser.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu-bar',
@@ -46,7 +48,7 @@ import {ThemeService} from '../../core/services/themeService/theme.service';
 export class MenuBarComponent implements OnInit {
 
 
-  constructor(private themeService: ThemeService) {
+  constructor(private themeService: ThemeService, private router: Router, private currentUser: CurrentUserService) {
   }
 
   logoSrc: string = '/ps_logo.png';
@@ -58,9 +60,19 @@ export class MenuBarComponent implements OnInit {
   varerItems: MenuItem[] | undefined;
   lagerItems: MenuItem[] | undefined;
   rapporterItems: MenuItem[] | undefined;
+  avatarItems: MenuItem[] | undefined;
 
 
 
+
+  goToSettings() {
+    console.log('Navigating to settings');
+  }
+
+  logout() {
+    this.currentUser.clearCurrentUser();
+    this.router.navigate(['/login']);
+  }
 
 
 
@@ -70,6 +82,11 @@ export class MenuBarComponent implements OnInit {
     this.themeService.darkMode$.subscribe((isDarkMode) => {
       this.logoSrc = isDarkMode ? "/ps_logo_hvid.png" : "/ps_logo.png";
     });
+
+    this.avatarItems = [
+      { label: 'Settings', icon: 'pi pi-cog', command: () => this.goToSettings() },
+      { label: 'Logout', icon: 'pi pi-sign-out', command: () => this.logout() }
+    ];
 
 
 
@@ -88,7 +105,8 @@ export class MenuBarComponent implements OnInit {
           },
           {
             label: 'Find kvittering',
-            icon: 'pi pi-upload'
+            icon: 'pi pi-upload',
+            routerLink: '/find-receipt'
           },
           {
             label: 'Vis seneste kvitteringer',

@@ -24,14 +24,14 @@ import {ButtonModule} from 'primeng/button';
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })
-export class MainPageComponent implements OnInit
+export class MainPageComponent
 {
 
-  constructor(private router: Router, private currentUser: CurrentUserService, private themeService: ThemeService)
+  constructor()
   {
   }
 
-  tileBorderColor = '';
+
 
   tiles = [
     { title: 'Kasse (salg)', icon: 'pi pi-shopping-cart', link: '/counter' },
@@ -41,23 +41,13 @@ export class MainPageComponent implements OnInit
     { title: 'Vis uafsluttede sager', icon: 'pi pi-exclamation-circle', link: '/unsolved-cases' },
     { title: 'Varer', icon: 'pi pi-box', link: '/products' },
     { title: 'Administrer lagerbeholdning', icon: 'pi pi-cog', link: '/stock-management' },
-    { title: 'Find kvittering', icon: 'pi pi-file', action: () => this.Logout() },
+    { title: 'Find kvittering', icon: 'pi pi-file', link: '/find-receipt' },
     { title: 'Vis seneste kvitteringer', icon: 'pi pi-file', link: '/latest-receipts' },
   ];
 
 
-  Logout()
-  {
-    this.currentUser.clearCurrentUser();
-    this.router.navigate(['/login']);
-  }
 
-  ngOnInit(): void {
 
-    this.themeService.darkMode$.subscribe((isDarkMode) => {
-      this.tileBorderColor = isDarkMode ? "#3f3f46" : "#e2e8f0";
-    });
-  }
 
 
 
