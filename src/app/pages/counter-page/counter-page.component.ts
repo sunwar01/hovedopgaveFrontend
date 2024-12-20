@@ -29,6 +29,8 @@ import {ReceiptLinesPostDto} from '../../core/models/receiptLinesRelated/dto/rec
 import {ReceiptLinesService} from '../../core/services/api/receiptLines.service';
 import {CounterSalesService} from '../../core/services/api/counterSales.service';
 import {CounterSalesPostDto} from '../../core/models/counterSalesRelated/dto/counterSalesPost.dto';
+import {CurrentCounterService} from '../../core/services/currentCounterService/currentCounter.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-counter-page',
@@ -85,10 +87,17 @@ export class CounterPageComponent implements OnInit{
   constructor(private currentStoreService: CurrentStoreService,
               private stockProductsService: StockProductsService, private receiptService : ReceiptService,
               private toastService : ToastService, private currentUserService : CurrentUserService,
-              private receiptLinesService : ReceiptLinesService, private counterSalesService : CounterSalesService) { }
+              private receiptLinesService : ReceiptLinesService, private counterSalesService : CounterSalesService,
+              private currentCounterService : CurrentCounterService,
+              private router : Router, private currentCounter : CurrentCounterService) { }
 
   ngOnInit(): void
   {
+
+    if (this.currentCounterService.currentCounter == null){
+
+      this.router.navigate(['/counter-selection']);
+    }
 
     this.updateStockProductList();
 
@@ -231,7 +240,7 @@ export class CounterPageComponent implements OnInit{
         paymentType: p.paymentType,
         amount: p.amount,
         storeId: this.currentStoreService.currentStore?.id,
-        counterId: 3,
+        counterId: this.currentCounter.currentCounter?.id,
       };
 
 
@@ -292,7 +301,7 @@ export class CounterPageComponent implements OnInit{
     const receipt: ReceiptPostDto = {
       total : this.calculateTotalPrice(),
       storeId : this.currentStoreService.currentStore?.id,
-      counterId : 1, // counter id er hardcoded, da at have flere kasser er ude for scope, men kan nemt implementeres hvis det ønskes
+      counterId : this.currentCounterService.currentCounter?.id,
       userId : this.currentUserService.getCurrentUserId(),
       caseId : null, // case id er null, da vi her laver et salg direkte i kassen
     };

@@ -5,5 +5,5 @@ export interface CounterSalesPostDto {
   paymentType: PaymentType;
   amount: number;
   storeId: number | undefined;
-  counterId: number;
+  counterId: number | undefined;
 }

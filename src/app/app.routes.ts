@@ -16,6 +16,7 @@ import {UnsolvedCasesPageComponent} from './pages/unsolved-cases-page/unsolved-c
 import {ShowLatestReceiptsPageComponent} from './pages/show-latest-receipts-page/show-latest-receipts-page.component';
 import {FindReceiptPageComponent} from './pages/find-receipt-page/find-receipt-page.component';
 import {DisplayReceiptPageComponent} from './pages/display-receipt-page/display-receipt-page.component';
+import {SelectCounterPageComponent} from './pages/select-counter-page/select-counter-page.component';
 
 export const routes: Routes = [
 
@@ -49,6 +50,7 @@ export const routes: Routes = [
    *           Counter Related               *
    * *****************************************/
   { path: 'counter', component: CounterPageComponent},
+  { path: 'counter-selection', component: SelectCounterPageComponent},
 
 
   /*******************************************

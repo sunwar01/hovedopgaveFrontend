@@ -18,6 +18,8 @@ import {ImageModule} from 'primeng/image';
 import {ThemeService} from '../../core/services/themeService/theme.service';
 import {CurrentUserService} from '../../core/services/currentUserService/currentUser.service';
 import {Router} from '@angular/router';
+import {CurrentCounterService} from '../../core/services/currentCounterService/currentCounter.service';
+import {CurrentStoreService} from '../../core/services/currentStoreService/currentStore.service';
 
 @Component({
   selector: 'app-menu-bar',
@@ -48,7 +50,8 @@ import {Router} from '@angular/router';
 export class MenuBarComponent implements OnInit {
 
 
-  constructor(private themeService: ThemeService, private router: Router, private currentUser: CurrentUserService) {
+  constructor(private themeService: ThemeService, private router: Router, private currentUser: CurrentUserService,
+              private currentCounter: CurrentCounterService, private currentStore: CurrentStoreService) {
   }
 
   logoSrc: string = '/ps_logo.png';
@@ -70,6 +73,8 @@ export class MenuBarComponent implements OnInit {
   }
 
   logout() {
+    this.currentCounter.clearCurrentCounter();
+    this.currentStore.clearCurrentStore();
     this.currentUser.clearCurrentUser();
     this.router.navigate(['/login']);
   }
