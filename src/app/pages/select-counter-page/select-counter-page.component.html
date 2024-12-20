@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+<div class="counter-selection-page-container">
+
+
+
+  <p-card>
+    <ng-template pTemplate="title">
+      <h1>Vælg Kasse</h1>
+    </ng-template>
+
+    <ng-template pTemplate="content">
+      <div class="counter-grid">
+        <p-button
+          severity="secondary"
+          [style]="{width: '15rem', height: '15rem', border: '1px solid'}"
+          *ngFor="let counter of availableCounters"
+          iconPos="top"
+          (click)="CounterClicked(counter)">
+          <div>
+            <i
+              [ngClass]="counter.status ? 'pi pi-check-circle' : 'pi pi-times-circle'"
+              [style.color]="counter.status ? 'green' : 'red'"
+              style="font-size: 2rem;"></i>
+            <h2>{{ counter.name }}</h2>
+          </div>
+        </p-button>
+      </div>
+    </ng-template>
+
+  </p-card>
+
+
+
+
+
+</div>
+
+</html>

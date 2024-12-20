@@ -1,0 +1,42 @@
+
+.counter-selection-page-container
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+}
+
+h1 {
+
+  font-size : 1.5rem;
+}
+
+h2 {
+
+  font-size : 1rem;
+}
+
+img {
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+
+.counter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2vh;
+}
+
+p-button {
+
+  transition: transform 0.3s;
+}
+
+p-button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
