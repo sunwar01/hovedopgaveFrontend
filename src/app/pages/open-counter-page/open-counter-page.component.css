@@ -1,0 +1,50 @@
+
+
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+
+
+}
+
+.open-counter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+
+
+p-card
+{
+  margin-top : 12vh;
+
+}
+
+
+.card-content {
+  display: flex;
+  width: 100%;
+}
+
+.left-panel {
+  flex: 0 0 50%;
+  padding: 10px;
+}
+
+.right-panel {
+  flex: 0 0 45%;
+  padding: 10px;
+}
+
+.divider {
+  height: 100%;
+  margin: 0 10px;
+}
+
+
+

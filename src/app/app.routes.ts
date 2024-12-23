@@ -17,6 +17,8 @@ import {ShowLatestReceiptsPageComponent} from './pages/show-latest-receipts-page
 import {FindReceiptPageComponent} from './pages/find-receipt-page/find-receipt-page.component';
 import {DisplayReceiptPageComponent} from './pages/display-receipt-page/display-receipt-page.component';
 import {SelectCounterPageComponent} from './pages/select-counter-page/select-counter-page.component';
+import {OpenCounterPageComponent} from './pages/open-counter-page/open-counter-page.component';
+import {CloseCounterPageComponent} from './pages/close-counter-page/close-counter-page.component';
 
 export const routes: Routes = [
 
@@ -50,7 +52,9 @@ export const routes: Routes = [
    *           Counter Related               *
    * *****************************************/
   { path: 'counter', component: CounterPageComponent},
-  { path: 'counter-selection', component: SelectCounterPageComponent},
+  { path: 'counter-selection/:type', component: SelectCounterPageComponent}, //  select, open or close
+  { path: 'open-counter/:counterId', component: OpenCounterPageComponent},
+  { path: 'close-counter/:counterId', component: CloseCounterPageComponent},
 
 
   /*******************************************
@@ -62,6 +66,7 @@ export const routes: Routes = [
   { path: 'display-case/:caseId', component: DisplayCasePageComponent},
   { path: 'latest-cases', component: ShowLatestCasesPageComponent},
   { path: 'unsolved-cases', component: UnsolvedCasesPageComponent},
+
 
 
   /*******************************************

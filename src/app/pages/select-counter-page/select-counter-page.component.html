@@ -7,11 +7,13 @@
 
   <p-card>
     <ng-template pTemplate="title">
-      <h1>Vælg Kasse</h1>
+      <h1 *ngIf="counterSelectionType == 'select' ">Vælg/skift Kasse</h1>
+      <h1 *ngIf="counterSelectionType == 'open' ">Åben Kasse</h1>
+      <h1 *ngIf="counterSelectionType == 'close' ">Luk Kasse</h1>
     </ng-template>
 
     <ng-template pTemplate="content">
-      <div class="counter-grid">
+      <div *ngIf="availableCounters.length > 0" class="counter-grid">
         <p-button
           severity="secondary"
           [style]="{width: '15rem', height: '15rem', border: '1px solid'}"
@@ -26,6 +28,9 @@
             <h2>{{ counter.name }}</h2>
           </div>
         </p-button>
+      </div>
+      <div *ngIf="availableCounters.length == 0">
+        <h2>Ingen kasser tilgængelige</h2>
       </div>
     </ng-template>
 

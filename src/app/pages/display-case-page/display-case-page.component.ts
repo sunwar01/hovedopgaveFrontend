@@ -308,9 +308,8 @@ export class DisplayCasePageComponent implements OnInit {
       }
     });
 
-
-
   }
+
 
 
 
@@ -389,8 +388,6 @@ export class DisplayCasePageComponent implements OnInit {
         console.error("Case ID is null or undefined.");
       }
     });
-
-
   }
 
 
@@ -399,17 +396,12 @@ export class DisplayCasePageComponent implements OnInit {
     this.editCustomerDialog = false;
   }
 
+
+
+
   ngOnInit(): void {
-
-
-
-
     this.updateCase();
     this.updateStockProductList();
     this.populateCaseStatuses();
-
-
-
-
   }
 }

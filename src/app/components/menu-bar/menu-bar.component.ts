@@ -20,6 +20,7 @@ import {CurrentUserService} from '../../core/services/currentUserService/current
 import {Router} from '@angular/router';
 import {CurrentCounterService} from '../../core/services/currentCounterService/currentCounter.service';
 import {CurrentStoreService} from '../../core/services/currentStoreService/currentStore.service';
+import {StoreModel} from '../../core/models/storeRelated/store.model';
 
 @Component({
   selector: 'app-menu-bar',
@@ -52,9 +53,16 @@ export class MenuBarComponent implements OnInit {
 
   constructor(private themeService: ThemeService, private router: Router, private currentUser: CurrentUserService,
               private currentCounter: CurrentCounterService, private currentStore: CurrentStoreService) {
+
+
+
+
   }
 
+
   logoSrc: string = '/ps_logo.png';
+
+
 
 
 
@@ -81,7 +89,11 @@ export class MenuBarComponent implements OnInit {
 
 
 
+
   ngOnInit() {
+
+
+
 
 
     this.themeService.darkMode$.subscribe((isDarkMode) => {
@@ -105,8 +117,19 @@ export class MenuBarComponent implements OnInit {
             routerLink: '/counter'
           },
           {
-            label: 'Kassefunktioner',
-            icon: 'pi pi-upload'
+            label: 'Luk kasse',
+            icon: 'pi pi-upload',
+            routerLink: ['/counter-selection', 'close']
+          },
+          {
+            label: 'Åbn kasse',
+            icon: 'pi pi-upload',
+            routerLink: ['/counter-selection', 'open']
+          },
+          {
+            label: 'Skift kasse',
+            icon: 'pi pi-upload',
+            routerLink: ['/counter-selection', 'select']
           },
           {
             label: 'Find kvittering',

@@ -7,8 +7,6 @@ export interface CounterModel {
   id: number;
   storeId: number;
   name: string;
-  startHolding: number;
-  currentHolding: number;
   status: boolean;
   isDeleted: boolean;
 

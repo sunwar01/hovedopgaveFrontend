@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+<div class="open-counter-container">
+  <p-toast />
+  <p-card header="Åben Kasse"
+          [style]="
+          {'max-width': '60rem',
+           'border-radius': '2vh',
+           'min-width': '60rem',
+           'max-height': '50rem',
+           'overflow': 'auto'
+           }">
+
+
+
+    <p-card  subheader="Optællingsskema"  [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
+
+
+
+
+
+            <div class="card-content">
+              <div class="left-panel">
+
+
+                <p-card subheader="sedler">
+
+                  <p-inputgroup>
+                    <p-floatlabel variant="in">
+                      <input pInputText id="1000" [(ngModel)]="cash1000"  (ngModelChange)="calculateTotalCounted()"/>
+                      <label for="1000">1000 kr.</label>
+                    </p-floatlabel>
+                  </p-inputgroup>
+
+                  <p-inputgroup>
+                    <p-floatlabel variant="in">
+                      <input pInputText id="500"  [(ngModel)]="cash500" (ngModelChange)="calculateTotalCounted()"/>
+                      <label for="500">500 kr.</label>
+                    </p-floatlabel>
+                  </p-inputgroup>
+
+                  <p-inputgroup>
+                    <p-floatlabel variant="in">
+                      <input pInputText id="200" [(ngModel)]="cash200" (ngModelChange)="calculateTotalCounted()"/>
+                      <label for="200">200 kr.</label>
+                    </p-floatlabel>
+                  </p-inputgroup>
+
+                  <p-inputgroup>
+                    <p-floatlabel variant="in">
+                      <input pInputText id="100" [(ngModel)]="cash100" (ngModelChange)="calculateTotalCounted()"/>
+                      <label for="100">100 kr.</label>
+                    </p-floatlabel>
+                  </p-inputgroup>
+
+                  <p-inputgroup>
+                    <p-floatlabel variant="in">
+                      <input pInputText id="50"  [(ngModel)]="cash50" (ngModelChange)="calculateTotalCounted()"/>
+                      <label for="50">50 kr.</label>
+                    </p-floatlabel>
+                  </p-inputgroup>
+
+
+                </p-card>
+
+              </div>
+
+
+              <p-divider layout="vertical"></p-divider>
+
+
+              <div class="right-panel">
+
+
+                <p-card subheader="mønter">
+
+                  <p-inputgroup>
+                    <p-floatlabel variant="in">
+                      <input pInputText id="20" [(ngModel)]="cash20" (ngModelChange)="calculateTotalCounted()"/>
+                      <label for="20">20 kr.</label>
+                    </p-floatlabel>
+                  </p-inputgroup>
+
+                  <p-inputgroup>
+                    <p-floatlabel variant="in">
+                      <input pInputText id="10" [(ngModel)]="cash10" (ngModelChange)="calculateTotalCounted()" />
+                      <label for="10">10 kr.</label>
+                    </p-floatlabel>
+                  </p-inputgroup>
+
+                  <p-inputgroup>
+                    <p-floatlabel variant="in">
+                      <input pInputText id="5" [(ngModel)]="cash5" (ngModelChange)="calculateTotalCounted()"/>
+                      <label for="5">5 kr.</label>
+                    </p-floatlabel>
+                  </p-inputgroup>
+
+                  <p-inputgroup>
+                    <p-floatlabel variant="in">
+                      <input pInputText id="2" [(ngModel)]="cash2" (ngModelChange)="calculateTotalCounted()"/>
+                      <label for="2">2 kr.</label>
+                    </p-floatlabel>
+                  </p-inputgroup>
+
+                  <p-inputgroup>
+                    <p-floatlabel variant="in">
+                      <input pInputText id="1" [(ngModel)]="cash1" (ngModelChange)="calculateTotalCounted()"/>
+                      <label for="1">1 kr.</label>
+                    </p-floatlabel>
+                  </p-inputgroup>
+
+                  <p-inputgroup>
+                    <p-floatlabel variant="in">
+                      <input pInputText id="05" [(ngModel)]="cash05" (ngModelChange)="calculateTotalCounted()"/>
+                      <label for="05">50 øre</label>
+                    </p-floatlabel>
+                  </p-inputgroup>
+
+
+
+                </p-card>
+
+              </div>
+
+            </div>
+
+
+
+
+
+  </p-card>
+
+
+    <p-card  subheader="Kassebeholdning" [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
+
+
+
+
+
+          <p-card subheader="Optalt">
+
+            <p-inputgroup >
+              <p-floatlabel  variant="in">
+                <input readonly pInputText id="cash"  [(ngModel)]="totalCounted" />
+                <label for="cash">Kontant</label>
+              </p-floatlabel>
+
+              <p-floatlabel  variant="in">
+                <input readonly pInputText id="diff"  [(ngModel)]="isDifference" />
+                <label for="diff">Difference</label>
+              </p-floatlabel>
+
+
+            </p-inputgroup>
+
+
+
+
+          </p-card>
+
+
+
+
+
+    </p-card>
+
+
+</p-card>
+
+
+</div>
+
+
+
+</html>

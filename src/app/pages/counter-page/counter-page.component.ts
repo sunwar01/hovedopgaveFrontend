@@ -89,14 +89,19 @@ export class CounterPageComponent implements OnInit{
               private toastService : ToastService, private currentUserService : CurrentUserService,
               private receiptLinesService : ReceiptLinesService, private counterSalesService : CounterSalesService,
               private currentCounterService : CurrentCounterService,
-              private router : Router, private currentCounter : CurrentCounterService) { }
+              private router : Router) { }
 
   ngOnInit(): void
   {
 
-    if (this.currentCounterService.currentCounter == null){
+    console.log(this.currentCounterService.currentCounter);
+    console.log(this.currentCounterService.currentCounter?.status);
 
-      this.router.navigate(['/counter-selection']);
+
+
+    if (this.currentCounterService.currentCounter == null || this.currentCounterService.currentCounter?.status == false) {
+
+      this.router.navigate(['/counter-selection' + '/select']);
     }
 
     this.updateStockProductList();
@@ -240,7 +245,7 @@ export class CounterPageComponent implements OnInit{
         paymentType: p.paymentType,
         amount: p.amount,
         storeId: this.currentStoreService.currentStore?.id,
-        counterId: this.currentCounter.currentCounter?.id,
+        counterId: this.currentCounterService.currentCounter?.id,
       };
 
 

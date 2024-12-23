@@ -47,6 +47,11 @@ export class CounterSalesService
     return this.http.put(`${this.baseUrl}RestoreCounterSales/${id}`, null);
   }
 
+  GetCounterSalesByCounterId(counterId: number): Observable<any>
+  {
+    return this.http.get(`${this.baseUrl}GetCounterSalesByCounterId/${counterId}`);
+  }
+
 
 
 
