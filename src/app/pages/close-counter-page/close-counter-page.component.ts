@@ -11,7 +11,7 @@ import {InputGroupModule} from 'primeng/inputgroup';
 import {InputTextModule} from 'primeng/inputtext';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CounterReportService} from '../../core/services/api/counterReport.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CurrentCounterService} from '../../core/services/currentCounterService/currentCounter.service';
 import {CounterSalesService} from '../../core/services/api/counterSales.service';
 import {ButtonModule} from 'primeng/button';
@@ -97,7 +97,8 @@ export class CloseCounterPageComponent implements OnInit {
               private currentCounterService: CurrentCounterService,
               private counterSales : CounterSalesService,
               private counterService : CounterService,
-              private counterReportPaymentsService : CounterReportPaymentsService) {
+              private counterReportPaymentsService : CounterReportPaymentsService,
+              private router : Router) {
   }
 
 
@@ -113,37 +114,55 @@ export class CloseCounterPageComponent implements OnInit {
         return;
       }
 
-      this.counterSales.GetCounterSalesByCounterId(params['counterId']).subscribe((data) => {
-        if (data != null) {
+      let targetDate = new Date();
 
-          data
-            .filter((sale: any) => sale.paymentType === 0)  // 0 = cash
-            .forEach((sale: any) => {
-              this.RegisteredCash += sale.amount;
-            });
-
-
-          data
-            .filter((sale: any) => sale.paymentType === 1) // 1 = card
-            .forEach((sale: any) => {
-              this.RegisteredCard += sale.amount;
-            });
-
-          data
-            .filter((sale: any) => sale.paymentType === 2) // 2 = invoice
-            .forEach((sale: any) => {
-              this.RegisteredInvoice += sale.amount;
-            });
-
-          data
-            .filter((sale: any) => sale.paymentType === 3) // 3 = mobilePay
-            .forEach((sale: any) => {
-              this.RegisteredMobilePay += sale.amount;
-            });
-
-          this.calculateDifference();
-
+      this.counterReportService.GetLatestCounterReportById(params['counterId']).subscribe((counterReport) => {
+        if (counterReport != null) {
+          targetDate = new Date(counterReport.openDateTime);
         }
+
+
+        this.counterSales.GetCounterSalesByCounterId(params['counterId']).subscribe((data) => {
+          if (data != null) {
+
+            const filteredSalesByDate = data.filter((sale: any) => {
+              const saleDate = new Date(sale.saleDateTime);
+              return saleDate > targetDate;
+            });
+
+            console.log(counterReport.startHolding);
+
+            this.RegisteredCash = counterReport.startHolding;
+
+            filteredSalesByDate
+              .filter((sale: any) => sale.paymentType === 0) // 0 = cash
+              .forEach((sale: any) => {
+                this.RegisteredCash += sale.amount;
+              });
+
+            console.log("nigger " + this.RegisteredCash);
+
+            filteredSalesByDate
+              .filter((sale: any) => sale.paymentType === 1) // 1 = card
+              .forEach((sale: any) => {
+                this.RegisteredCard += sale.amount;
+              });
+
+            filteredSalesByDate
+              .filter((sale: any) => sale.paymentType === 2) // 2 = invoice
+              .forEach((sale: any) => {
+                this.RegisteredInvoice += sale.amount;
+              });
+
+            filteredSalesByDate
+              .filter((sale: any) => sale.paymentType === 3) // 3 = mobilePay
+              .forEach((sale: any) => {
+                this.RegisteredMobilePay += sale.amount;
+              });
+
+            this.calculateDifference();
+          }
+        });
       });
     });
   }
@@ -198,14 +217,17 @@ export class CloseCounterPageComponent implements OnInit {
 
 
 
-      const counterReportUpdate: CounterReportUpdateDto = {
-        newHolding: this.newHolding,
-        difference: this.totalDifference
-      };
+
 
 
       this.counterReportService.GetLatestCounterReportById(params['counterId']).subscribe((data) => {
         if (data != null) {
+
+
+          const counterReportUpdate: CounterReportUpdateDto = {
+            newHolding: this.newHolding,
+            difference: this.totalDifference
+          };
 
           this.counterReportService.updateCounterReport(data, counterReportUpdate).subscribe({
 
@@ -273,7 +295,7 @@ export class CloseCounterPageComponent implements OnInit {
             status: false
           }
 
-          this.counterService.UpdateCounter({id: params['counterId'],  counterUpdate}).subscribe({
+          this.counterService.UpdateCounter(params['counterId'],  counterUpdate).subscribe({
             error: (error: any) => {
               console.log(error);
             },
@@ -294,6 +316,7 @@ export class CloseCounterPageComponent implements OnInit {
 
 
     this.currentCounterService.clearCurrentCounter();
+    this.router.navigate(['/main']);
 
   }
 

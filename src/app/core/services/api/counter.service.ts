@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {CustomerUpdateDto} from '../../models/customerRelated/dto/customerUpdate.dto';
+import {CounterUpdateDto} from '../../models/counterRelated/dto/counterUpdate.dto';
 
 @Injectable
 ({
@@ -22,9 +24,12 @@ export class CounterService
     return this.http.get(`${this.baseUrl}GetCounters`);
   }
 
-  UpdateCounter(counter: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}UpdateCounter/${counter.id}`, counter);
+
+
+  UpdateCounter(counterId: number, counterUpdateDto: CounterUpdateDto): Observable<any> {
+    return this.http.put(`${this.baseUrl}UpdateCounter/${counterId}`, counterUpdateDto);
   }
+
 
 
 

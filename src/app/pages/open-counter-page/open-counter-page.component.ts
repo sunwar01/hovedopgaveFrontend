@@ -11,7 +11,11 @@ import {ToastModule} from "primeng/toast";
 import {DividerModule} from 'primeng/divider';
 import {CurrentCounterService} from '../../core/services/currentCounterService/currentCounter.service';
 import {CounterReportService} from '../../core/services/api/counterReport.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CounterReportUpdateDto} from '../../core/models/counterReportRelated/dto/counterReportUpdate.dto';
+import {CounterReportPostDto} from '../../core/models/counterReportRelated/dto/counterReportPost.dto';
+import {CounterService} from '../../core/services/api/counter.service';
+import {CounterUpdateDto} from '../../core/models/counterRelated/dto/counterUpdate.dto';
 
 @Component({
   selector: 'app-open-counter-page',
@@ -55,14 +59,53 @@ export class OpenCounterPageComponent implements OnInit  {
 
   constructor(private currentCounterService: CurrentCounterService,
               private counterReportService : CounterReportService,
-              private route : ActivatedRoute) {
+              private route : ActivatedRoute,
+              private counterService : CounterService,
+              private router : Router) {
+  }
+
+  openCounter() {
+
+
+
+    this.route.params.subscribe(params => {
+
+      if (params['counterId'] == null) {
+        console.log("No counter id");
+        return;
+      }
+
+      const counterReportPost: CounterReportPostDto = {
+        counterId: params['counterId'],
+        startHolding: this.totalCounted
+      };
+
+
+      this.counterReportService.createCounterReport(counterReportPost).subscribe((data) => {
+        console.log(data);
+      });
+
+      const counterUpdate: CounterUpdateDto = {
+        status: true
+      }
+
+
+
+      this.counterService.UpdateCounter(params['counterId'],  counterUpdate).subscribe((data) => {
+        console.log(data);
+      });
+
+
+    });
+
+    this.router.navigate(['/main']);
+
+
+
   }
 
 
   calculateDifference() {
-
-
-
 
 
     this.route.params.subscribe(params => {
@@ -81,7 +124,7 @@ export class OpenCounterPageComponent implements OnInit  {
           let lastReportEndHolding = data.newHolding;
 
           if (lastReportEndHolding != null) {
-            this.isDifference = this.totalCounted - lastReportEndHolding > 0;
+            this.isDifference = this.totalCounted !== lastReportEndHolding;
           }
 
 
@@ -102,6 +145,7 @@ export class OpenCounterPageComponent implements OnInit  {
 
   ngOnInit(): void {
 
+    this.calculateDifference();
 
 
   }
