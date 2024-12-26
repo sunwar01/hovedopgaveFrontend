@@ -7,4 +7,5 @@ export interface CounterSalesModel {
   amount: number;
   storeId: number;
   counterId: number;
+  saleDateTime: Date;
 }

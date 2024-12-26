@@ -19,6 +19,9 @@ import {DisplayReceiptPageComponent} from './pages/display-receipt-page/display-
 import {SelectCounterPageComponent} from './pages/select-counter-page/select-counter-page.component';
 import {OpenCounterPageComponent} from './pages/open-counter-page/open-counter-page.component';
 import {CloseCounterPageComponent} from './pages/close-counter-page/close-counter-page.component';
+import {
+  DisplayCounterSalesPageComponent
+} from './pages/display-counter-sales-page/display-counter-sales-page.component';
 
 export const routes: Routes = [
 
@@ -77,8 +80,11 @@ export const routes: Routes = [
   { path: 'find-receipt', component: FindReceiptPageComponent},
   { path: 'display-receipt/:receiptId', component: DisplayReceiptPageComponent},
 
+  /*******************************************
+   *           Counter Sales Related         *
+   * *****************************************/
 
-
+  { path: 'show-counter-sales', component: DisplayCounterSalesPageComponent},
 
 
 

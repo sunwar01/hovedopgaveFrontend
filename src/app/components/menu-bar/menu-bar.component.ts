@@ -224,12 +224,7 @@ export class MenuBarComponent implements OnInit {
             label: 'Administrer lagerbeholdning',
             icon: 'pi pi-refresh',
             routerLink: '/stock-management'
-          },
-          {
-            label: 'Lagerrapport',
-            icon: 'pi pi-times'
           }
-
         ]
       }
     ];
@@ -243,7 +238,8 @@ export class MenuBarComponent implements OnInit {
         items: [
           {
             label: 'Kassetransaktioner',
-            icon: 'pi pi-refresh'
+            icon: 'pi pi-refresh',
+            routerLink: '/show-counter-sales'
           },
           {
             label: 'Kasseopgørelser',

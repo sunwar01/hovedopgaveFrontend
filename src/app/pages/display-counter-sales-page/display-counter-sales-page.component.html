@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="dk">
+
+
+<div class="display-counter-sales-container">
+  <p-toast />
+  <p-card header="Kassetransaktioner"
+          [style]="
+          {'max-width': '80rem',
+           'border-radius': '2vh',
+           'min-width': '80rem',
+            'min-height': '50rem',
+            'max-height': '50rem',
+
+
+           }">
+
+    <p-floatlabel variant="in">
+      <p-datePicker  id="in_label" [(ngModel)]="chosenDate"  (onSelect)="updateAvailableCounterSales()"  showIcon iconDisplay="input" />
+      <label for="in_label">Vælg dato</label>
+    </p-floatlabel>
+
+
+
+    <p-table
+      #counterSaleTable
+      [value]="filteredCounterSales"
+      [scrollable]="true"
+      scrollHeight="53vh"
+      stripedRows>
+
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Bon id</th>
+          <th>Tidspunkt</th>
+          <th>Beløb</th>
+          <th>betalingstype</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-counterSale>
+        <tr *ngIf="counterSaleTable._value.length">
+          <td>{{counterSale.receiptId}}</td>
+          <td>{{counterSale.saleDateTime | date: 'dd-MM-yyyy HH:mm'}}</td>
+          <td>{{counterSale.amount}}</td>
+          <td>{{getPaymentTypeText(counterSale.paymentType)}}</td>
+
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <div *ngIf="!counterSaleTable.filteredValue?.length" class="no-results">
+      <i class="pi pi-search-minus"></i>
+      <p>Ingen kvitteringer matcher din søgning.</p>
+    </div>
+
+
+
+  </p-card>
+
+
+</div>
+
+
+</html>

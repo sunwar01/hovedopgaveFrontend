@@ -16,15 +16,15 @@ export class CounterSalesService
   {
   }
 
-  GetCounterSaless(): Observable<any>
+  GetCounterSales(): Observable<any>
   {
-    return this.http.get(`${this.baseUrl}GetCounterSaless`);
+    return this.http.get(`${this.baseUrl}GetCounterSales`);
 
   }
 
-  GetCounterSales(id: number): Observable<any>
+  GetCounterSaleById(id: number): Observable<any>
   {
-    return this.http.get(`${this.baseUrl}GetCounterSales/${id}`);
+    return this.http.get(`${this.baseUrl}GetCounterSale/${id}`);
   }
 
   CreateCounterSales(counterSales: any): Observable<any> {

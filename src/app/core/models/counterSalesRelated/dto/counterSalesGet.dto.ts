@@ -7,4 +7,5 @@ export interface CounterSalesGetDto {
   amount: number;
   storeId: number;
   counterId: number;
+  saleDateTime: Date;
 }
