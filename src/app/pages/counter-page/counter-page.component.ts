@@ -30,7 +30,7 @@ import {ReceiptLinesService} from '../../core/services/api/receiptLines.service'
 import {CounterSalesService} from '../../core/services/api/counterSales.service';
 import {CounterSalesPostDto} from '../../core/models/counterSalesRelated/dto/counterSalesPost.dto';
 import {CurrentCounterService} from '../../core/services/currentCounterService/currentCounter.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-counter-page',
@@ -81,6 +81,8 @@ export class CounterPageComponent implements OnInit{
 
   selectedPaymentType: PaymentType = PaymentType.Card;
 
+  caseId: string | null = null;
+
 
 
 
@@ -89,7 +91,7 @@ export class CounterPageComponent implements OnInit{
               private toastService : ToastService, private currentUserService : CurrentUserService,
               private receiptLinesService : ReceiptLinesService, private counterSalesService : CounterSalesService,
               private currentCounterService : CurrentCounterService,
-              private router : Router) { }
+              private router : Router, private route : ActivatedRoute) { }
 
   ngOnInit(): void
   {
@@ -105,8 +107,63 @@ export class CounterPageComponent implements OnInit{
     }
 
     this.updateStockProductList();
+    //this.getProductsFromCase();
 
   }
+
+
+  /* private getStockProductId(productId: number, stockId: number): number {
+
+      this.stockProductsService.GetStockProductsByStockId(stockId).subscribe((data: StockProductsModel[]) => {
+
+
+         let stockProduct = data.find(p => p.productId === productId);
+
+         if (stockProduct) {
+           console.log(stockProduct.id);
+           return stockProduct.id;
+
+         }
+
+         return 0;
+
+
+      });
+
+     return 0;
+   }
+
+   private transformToSelectedStockProducts(caseProducts: any[]): void {
+
+     const currentStockId = this.currentStoreService.currentStore?.stock.id || 0;
+
+
+
+     this.selectedStockProducts = caseProducts.map(caseProduct => {
+
+       console.log(caseProduct.product.price);
+
+       return {
+         stockProductId: this.getStockProductId(caseProduct.productId, currentStockId),
+         product: caseProduct.product,
+         quantity: caseProduct.quantity,
+         type: 'sale'
+       };
+     });
+   }
+
+
+   getProductsFromCase() {
+
+     this.route.queryParams.subscribe(params => {
+       this.caseId = params['caseId'];
+
+       const caseProducts = params['caseProducts'] ? JSON.parse(params['caseProducts']) : [];
+
+       this.transformToSelectedStockProducts(caseProducts);
+     });
+
+   }*/
 
   getEnumName(value: number): string {
     return PaymentType[value];

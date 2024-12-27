@@ -76,37 +76,46 @@
 
           <p-card  subheader="Sagsoplysninger"  [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
 
+            <p-button
+              [style]=" {'margin-bottom': '2vh'}"
+              icon="pi pi-pencil"
+              severity="success"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="editCaseContentInformationClicked()"
+            />
+
             <p-inputgroup>
               <p-floatlabel variant="in">
-                <input pInputText id="repairModel" [(ngModel)]="repairModel" readonly disabled/>
+                <input pInputText id="repairModel" [(ngModel)]="repairModel.content" readonly disabled/>
                 <label for="repairModel">Model</label>
               </p-floatlabel>
             </p-inputgroup>
 
             <p-inputgroup>
               <p-floatlabel variant="in">
-                <input pInputText id="repairDesc" [(ngModel)]="repairDesc"  readonly disabled/>
+                <input pInputText id="repairDesc" [(ngModel)]="repairDesc.content"  readonly disabled/>
                 <label for="repairDesc">Beskrivelse</label>
               </p-floatlabel>
             </p-inputgroup>
 
             <p-inputgroup>
               <p-floatlabel variant="in">
-                <input pInputText id="repairPrice" [(ngModel)]="repairPrice" readonly disabled/>
+                <input pInputText id="repairPrice" [(ngModel)]="repairPrice.content" readonly disabled/>
                 <label for="repairPrice">Aftalt pris / tilbud</label>
               </p-floatlabel>
             </p-inputgroup>
 
             <p-inputgroup>
               <p-floatlabel variant="in">
-                <input pInputText id="repairVMI" [(ngModel)]="repairVMI" readonly disabled/>
+                <input pInputText id="repairVMI" [(ngModel)]="repairVMI.content" readonly disabled/>
                 <label for="repairVMI">VMI - Har enheden nogle fysiske skader ved indlevering?</label>
               </p-floatlabel>
             </p-inputgroup>
 
             <p-inputgroup>
               <p-floatlabel variant="in">
-                <input pInputText id="repairEstimate" [(ngModel)]="repairEstimate" readonly disabled/>
+                <input pInputText id="repairEstimate" [(ngModel)]="repairEstimate.content" readonly disabled/>
                 <label for="repairEstimate">Oplyst estimat på sagen (Tid)</label>
               </p-floatlabel>
             </p-inputgroup>
@@ -115,44 +124,53 @@
 
           <p-card  subheader="Detaljer"  [style]=" {'border': '1px solid', 'margin-top': '2vh'}">
 
+            <p-button
+              [style]=" {'margin-bottom': '2vh'}"
+              icon="pi pi-pencil"
+              severity="success"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="editCaseContentDetailsClicked()"
+            />
+
             <p-inputgroup>
               <p-floatlabel variant="in">
-                <input pInputText id="detailsPassword" [(ngModel)]="detailsPassword" readonly disabled/>
+                <input pInputText id="detailsPassword" [(ngModel)]="detailsPassword.content" readonly disabled/>
                 <label for="detailsPassword">Låsekode</label>
               </p-floatlabel>
             </p-inputgroup>
 
             <p-inputgroup>
               <p-floatlabel variant="in">
-                <input pInputText id="detailsPin" [(ngModel)]="detailsPin" readonly disabled/>
+                <input pInputText id="detailsPin" [(ngModel)]="detailsPin.content" readonly disabled/>
                 <label for="detailsPin">Pinkode</label>
               </p-floatlabel>
             </p-inputgroup>
 
             <p-inputgroup>
               <p-floatlabel variant="in">
-                <input pInputText id="detailsMailLogin" [(ngModel)]="detailsMailLogin" readonly disabled/>
+                <input pInputText id="detailsMailLogin" [(ngModel)]="detailsMailLogin.content" readonly disabled/>
                 <label for="detailsMailLogin">E-mail Apple ID / Google konto</label>
               </p-floatlabel>
             </p-inputgroup>
 
             <p-inputgroup>
               <p-floatlabel variant="in">
-                <input pInputText id="detailsPasswordLogin" [(ngModel)]="detailsPasswordLogin" readonly disabled/>
+                <input pInputText id="detailsPasswordLogin" [(ngModel)]="detailsPasswordLogin.content" readonly disabled/>
                 <label for="detailsPasswordLogin">Kode Apple ID / Google kode</label>
               </p-floatlabel>
             </p-inputgroup>
 
             <p-inputgroup>
               <p-floatlabel variant="in">
-                <input pInputText id="detailsIMEI" [(ngModel)]="detailsIMEI" readonly disabled/>
+                <input pInputText id="detailsIMEI" [(ngModel)]="detailsIMEI.content" readonly disabled/>
                 <label for="detailsIMEI">IMEI / serie-nummer</label>
               </p-floatlabel>
             </p-inputgroup>
 
             <p-inputgroup>
               <p-floatlabel variant="in" aria-readonly="true">
-                <input pInputText id="detailsAlreadyPaid" [(ngModel)]="detailsAlreadyPaid" readonly disabled/>
+                <input pInputText id="detailsAlreadyPaid" [(ngModel)]="detailsAlreadyPaid.content" readonly disabled/>
                 <label for="detailsAlreadyPaid">Allerede betalt? - Indtast BONID</label>
               </p-floatlabel>
             </p-inputgroup>
@@ -348,6 +366,128 @@
       <ng-template pTemplate="footer">
         <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideEditCustomerDialog()" severity="secondary" />
         <p-button pRipple label="Gem" icon="pi pi-check" (click)="saveCustomer()" severity="success" />
+      </ng-template>
+    </p-dialog>
+
+
+
+    <p-dialog
+      *ngIf="currentCase"
+      [(visible)]="editCaseContentInformation"
+      [style]="{ width: '450px' }"
+      header="Rediger sagsoplysninger"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content" >
+
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCaseContentInformationModel" [(ngModel)]="repairModel.content"/>
+            <label for="editCaseContentInformationModel">Model</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCaseContentInformationDesc" [(ngModel)]="repairDesc.content"/>
+            <label for="editCaseContentInformationDesc">Beskrivelse</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCaseContentInformationPrice" [(ngModel)]="repairPrice.content"/>
+            <label for="editCaseContentInformationPrice">Aftalt pris / tilbud</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCaseContentInformationVMI" [(ngModel)]="repairVMI.content"/>
+            <label for="editCaseContentInformationVMI">VMI - Har enheden nogle fysiske skader ved indlevering?</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCaseContentInformationEstimate" [(ngModel)]="repairEstimate.content"/>
+            <label for="editCaseContentInformationEstimate">Oplyst estimat på sagen (Tid)</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+      </ng-template>
+
+
+      <ng-template pTemplate="footer">
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideEditCaseContentInformationDialog()" severity="secondary" />
+        <p-button pRipple label="Gem" icon="pi pi-check" (click)="saveCaseContentInformation()" severity="success" />
+      </ng-template>
+    </p-dialog>
+
+
+
+    <p-dialog
+      *ngIf="currentCase"
+      [(visible)]="editCaseContentDetails"
+      [style]="{ width: '450px' }"
+      header="Rediger detaljer"
+      [modal]="true"
+      styleClass="p-fluid"
+    >
+      <ng-template pTemplate="content" >
+
+
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCaseContentDetailsPassword" [(ngModel)]="detailsPassword.content"/>
+            <label for="editCaseContentDetailsPassword">Låsekode</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCaseContentDetailsPin" [(ngModel)]="detailsPin.content"/>
+            <label for="editCaseContentDetailsPin">Pinkode</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCaseContentDetailsMail" [(ngModel)]="detailsMailLogin.content"/>
+            <label for="editCaseContentDetailsMail">E-mail Apple ID / Google konto</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCaseContentDetailsPasswordLogin" [(ngModel)]="detailsPasswordLogin.content"/>
+            <label for="editCaseContentDetailsPasswordLogin">Kode Apple ID / Google kode</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCaseContentDetailsIMEI" [(ngModel)]="detailsIMEI.content"/>
+            <label for="editCaseContentDetailsIMEI">IMEI / serie-nummer</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+        <p-inputgroup>
+          <p-floatlabel variant="in">
+            <input pInputText id="editCaseContentDetailsAlreadyPaid" [(ngModel)]="detailsAlreadyPaid.content"/>
+            <label for="editCaseContentDetailsAlreadyPaid">Allerede betalt? - Indtast BONID</label>
+          </p-floatlabel>
+        </p-inputgroup>
+
+      </ng-template>
+
+
+      <ng-template pTemplate="footer">
+        <p-button pRipple label="Fortryd" icon="pi pi-times" [text]="true" (click)="hideEditCaseContentDetailsDialog()" severity="secondary" />
+        <p-button pRipple label="Gem" icon="pi pi-check" (click)="saveCaseContentDetails()" severity="success" />
       </ng-template>
     </p-dialog>
 
