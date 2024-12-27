@@ -34,14 +34,16 @@
         <tr>
           <th>Bon id</th>
           <th>Tidspunkt</th>
+          <th>Kasse</th>
           <th>Beløb</th>
           <th>betalingstype</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-counterSale>
-        <tr *ngIf="counterSaleTable._value.length">
+        <tr *ngIf="counterSaleTable.value.length">
           <td>{{counterSale.receiptId}}</td>
           <td>{{counterSale.saleDateTime | date: 'dd-MM-yyyy HH:mm'}}</td>
+          <td>{{getCounterNameById(counterSale.counterId) }}</td>
           <td>{{counterSale.amount}}</td>
           <td>{{getPaymentTypeText(counterSale.paymentType)}}</td>
 
@@ -49,9 +51,9 @@
       </ng-template>
     </p-table>
 
-    <div *ngIf="!counterSaleTable.filteredValue?.length" class="no-results">
+    <div *ngIf="!counterSaleTable.value?.length" class="no-results">
       <i class="pi pi-search-minus"></i>
-      <p>Ingen kvitteringer matcher din søgning.</p>
+      <p>Ingen kassetransaktioner findes på denne dato.</p>
     </div>
 
 

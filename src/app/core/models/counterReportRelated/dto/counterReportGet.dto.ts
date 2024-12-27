@@ -1,5 +1,6 @@
 
 import {CounterReportPaymentsModel} from '../../counterReportPaymentsRelated/counterReportPayments.model';
+import {CounterModel} from '../../counterRelated/counter.model';
 
 
 export interface CounterReportGetDto {
@@ -12,7 +13,7 @@ export interface CounterReportGetDto {
   newDifference: number;
   closeDateTime: Date;
 
+  counter : CounterModel;
 
-
-  counterReports: CounterReportPaymentsModel[];
+  counterReportPayments: CounterReportPaymentsModel[];
 }

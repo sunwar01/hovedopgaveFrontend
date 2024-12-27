@@ -18,6 +18,11 @@ export class CounterReportService
   {
   }
 
+  getCounterReports(): Observable<any>
+  {
+    return this.http.get(`${this.baseUrl}GetCounterReports`);
+  }
+
   GetLatestCounterReportById(counterId: number): Observable<any>
   {
     return this.http.get(`${this.baseUrl}GetLatestCounterReport/${counterId}`);

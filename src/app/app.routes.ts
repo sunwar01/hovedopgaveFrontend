@@ -22,6 +22,7 @@ import {CloseCounterPageComponent} from './pages/close-counter-page/close-counte
 import {
   DisplayCounterSalesPageComponent
 } from './pages/display-counter-sales-page/display-counter-sales-page.component';
+import {DisplayCounterRapportComponent} from './pages/display-counter-rapport/display-counter-rapport.component';
 
 export const routes: Routes = [
 
@@ -85,6 +86,15 @@ export const routes: Routes = [
    * *****************************************/
 
   { path: 'show-counter-sales', component: DisplayCounterSalesPageComponent},
+
+
+  /*******************************************
+   *           Counter Rapport Related         *
+   * *****************************************/
+
+  { path: 'show-counter-rapport', component: DisplayCounterRapportComponent},
+
+
 
 
 

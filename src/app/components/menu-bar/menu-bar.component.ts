@@ -242,12 +242,10 @@ export class MenuBarComponent implements OnInit {
             routerLink: '/show-counter-sales'
           },
           {
-            label: 'Kasseopgørelser',
-            icon: 'pi pi-times'
-          },
-          {
             label: 'Kasserapport',
-            icon: 'pi pi-times'
+            icon: 'pi pi-times',
+            routerLink: '/show-counter-rapport'
+
           }
 
         ]

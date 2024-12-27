@@ -24,6 +24,11 @@ export class CounterService
     return this.http.get(`${this.baseUrl}GetCounters`);
   }
 
+  GetCounterById(counterId: number): Observable<any>
+  {
+    return this.http.get(`${this.baseUrl}GetCounter/${counterId}`);
+  }
+
 
 
   UpdateCounter(counterId: number, counterUpdateDto: CounterUpdateDto): Observable<any> {
