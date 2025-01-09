@@ -69,9 +69,6 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit() {
 
-
-
-
     if (this.loginForm.invalid)
     {
       return;
@@ -121,11 +118,6 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void
   {
-
-
-
-
-
 
     this.themeService.darkMode$.subscribe((isDarkMode) => {
       this.logoSrc = isDarkMode ? "/ps_logo_hvid.png" : "/ps_logo.png";

@@ -59,12 +59,7 @@ export class MenuBarComponent implements OnInit {
 
   }
 
-
   logoSrc: string = '/ps_logo.png';
-
-
-
-
 
   kasseItems: MenuItem[] | undefined;
   servicermaItems: MenuItem[] | undefined;
@@ -72,13 +67,6 @@ export class MenuBarComponent implements OnInit {
   lagerItems: MenuItem[] | undefined;
   rapporterItems: MenuItem[] | undefined;
   avatarItems: MenuItem[] | undefined;
-
-
-
-
-  goToSettings() {
-    console.log('Navigating to settings');
-  }
 
   logout() {
     this.currentCounter.clearCurrentCounter();
@@ -88,24 +76,15 @@ export class MenuBarComponent implements OnInit {
   }
 
 
-
-
   ngOnInit() {
-
-
-
-
 
     this.themeService.darkMode$.subscribe((isDarkMode) => {
       this.logoSrc = isDarkMode ? "/ps_logo_hvid.png" : "/ps_logo.png";
     });
 
     this.avatarItems = [
-      { label: 'Settings', icon: 'pi pi-cog', command: () => this.goToSettings() },
       { label: 'Logout', icon: 'pi pi-sign-out', command: () => this.logout() }
     ];
-
-
 
     this.kasseItems = [
       {
@@ -146,8 +125,6 @@ export class MenuBarComponent implements OnInit {
       }
     ];
 
-
-
     this.servicermaItems = [
       {
         label: 'Muligheder',
@@ -177,8 +154,6 @@ export class MenuBarComponent implements OnInit {
         ]
       }
     ];
-
-
 
 
     this.varerItems = [
@@ -213,9 +188,6 @@ export class MenuBarComponent implements OnInit {
     ];
 
 
-
-
-
     this.lagerItems = [
       {
         label: 'Muligheder',
@@ -228,8 +200,6 @@ export class MenuBarComponent implements OnInit {
         ]
       }
     ];
-
-
 
 
     this.rapporterItems = [
